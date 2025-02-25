@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KrewsUp - Brew Your Connections</title>
+    <title>KrewsUp - Brew Your Connections.</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
@@ -184,8 +184,8 @@
         }
         .btn {
             padding: 15px 35px;
-            border: none;
-            background: transparent;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, #FFFF00, #FFD700);
             border-radius: 0;
             font-size: 16px;
             font-weight: 600;
@@ -195,14 +195,10 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
-        }
-        #host-btn {
-            background: #FFFF00;
             color: #000;
         }
         #gig-btn {
-            background: #4a978f;
-            color: #000;
+            background: linear-gradient(45deg, #4a978f, #87CEEB);
         }
         .btn:before {
             content: '';
@@ -211,9 +207,12 @@
             left: 0;
             width: 0%;
             height: 100%;
-            background: #fff;
+            background: linear-gradient(45deg, #FFFF66, #FFA500);
             transition: all 0.4s ease;
             z-index: -1;
+        }
+        #gig-btn:before {
+            background: linear-gradient(45deg, #5ab9b0, #00CED1);
         }
         .btn:hover:before {
             width: 100%;
@@ -221,12 +220,7 @@
         .btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
-        }
-        #host-btn:hover {
-            background: #FFFF66;
-        }
-        #gig-btn:hover {
-            background: #5ab9b0;
+            border-color: rgba(255, 255, 255, 0.3);
         }
         .section-title {
             font-size: 48px;
@@ -766,7 +760,7 @@
                     <p class="description">KrewsUp is revolutionizing the gig economy by creating a seamless bridge between talent and opportunity. We connect event hosts with skilled aspirants, ensuring fast payments, verified profiles, and limitless growth potential.</p>
                     <div class="buttons">
                         <button class="btn" id="host-btn">Host an Event</button>
-                        <button class="btn" id="gig-btn">Join a Gig</button>
+                        <button class="btn" id="gig-btn">Join as a Gig</button>
                     </div>
                     <div class="app-buttons">
                         <div class="app-btn">
@@ -1049,7 +1043,7 @@
         <div class="modal" id="gig-modal">
             <div class="modal-content">
                 <span class="modal-close">×</span>
-                <h3 class="modal-title">Join a Gig</h3>
+                <h3 class="modal-title">Join as a Gig</h3>
                 <p class="modal-subtitle">Turn your skills into income with flexible opportunities</p>
                 <div class="feature-list">
                     <div class="feature-item">
