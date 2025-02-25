@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KrewsUp - Brew. Your. Connections.</title>
+    <title>KrewsUp - Brew Your Connections</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
@@ -18,6 +18,9 @@
             background-color: #000;
             overflow-x: hidden;
             min-height: 100vh;
+        }
+        body.modal-open {
+            overflow: hidden;
         }
         #bg-canvas {
             position: fixed;
@@ -102,11 +105,7 @@
             border: none;
             cursor: pointer;
             font-size: 28px;
-            transition: transform 0.3s ease;
             padding: 0 15px;
-        }
-        .mobile-menu-btn:hover {
-            transform: rotate(90deg);
         }
         .mobile-nav {
             display: none;
@@ -185,7 +184,7 @@
         }
         .btn {
             padding: 15px 35px;
-            border: 2px solid #fff;
+            border: none;
             background: transparent;
             border-radius: 0;
             font-size: 16px;
@@ -196,6 +195,14 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
+        }
+        #host-btn {
+            background: #FFFF00;
+            color: #000;
+        }
+        #gig-btn {
+            background: #4a978f;
+            color: #000;
         }
         .btn:before {
             content: '';
@@ -214,10 +221,12 @@
         .btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
-            color: #000;
         }
-        .btn:hover * {
-            color: #000;
+        #host-btn:hover {
+            background: #FFFF66;
+        }
+        #gig-btn:hover {
+            background: #5ab9b0;
         }
         .section-title {
             font-size: 48px;
@@ -399,15 +408,6 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             margin-bottom: 40px;
             position: relative;
-        }
-        .testimonial::before {
-            content: '"';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 120px;
-            opacity: 0.1;
-            font-family: serif;
         }
         .testimonial-text {
             font-size: 20px;
@@ -766,7 +766,7 @@
                     <p class="description">KrewsUp is revolutionizing the gig economy by creating a seamless bridge between talent and opportunity. We connect event hosts with skilled aspirants, ensuring fast payments, verified profiles, and limitless growth potential.</p>
                     <div class="buttons">
                         <button class="btn" id="host-btn">Host an Event</button>
-                        <button class="btn" id="gig-btn">Join as a Gig</button>
+                        <button class="btn" id="gig-btn">Join a Gig</button>
                     </div>
                     <div class="app-buttons">
                         <div class="app-btn">
@@ -801,7 +801,7 @@
             </div>
             <div class="testimonials">
                 <div class="testimonial">
-                    <p class="testimonial-text">"KrewsUp completely changed how we staff our events. In just a few clicks, we connect with reliable talent who are passionate and professional. The same-day payments keep everyone happy and coming back for more gigs."</p>
+                    <p class="testimonial-text">KrewsUp completely changed how we staff our events. In just a few clicks, we connect with reliable talent who are passionate and professional. The same-day payments keep everyone happy and coming back for more gigs.</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">A</div>
                         <div>
@@ -929,7 +929,7 @@
             </div>
             <div class="testimonials">
                 <div class="testimonial">
-                    <p class="testimonial-text">"As a college student, KrewsUp has been a game-changer for me. I can find weekend gigs that fit my schedule, gain real-world experience, and earn money without compromising my studies."</p>
+                    <p class="testimonial-text">As a college student, KrewsUp has been a game-changer for me. I can find weekend gigs that fit my schedule, gain real-world experience, and earn money without compromising my studies.</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">P</div>
                         <div>
@@ -939,7 +939,7 @@
                     </div>
                 </div>
                 <div class="testimonial">
-                    <p class="testimonial-text">"Finding reliable staff for our restaurant during festival seasons was always a nightmare until we discovered KrewsUp. Now we can scale our team up or down based on demand with qualified professionals."</p>
+                    <p class="testimonial-text">Finding reliable staff for our restaurant during festival seasons was always a nightmare until we discovered KrewsUp. Now we can scale our team up or down based on demand with qualified professionals.</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">R</div>
                         <div>
@@ -1418,45 +1418,47 @@
         const contactUsModal = document.getElementById('contact-us-modal');
         const closeButtons = document.querySelectorAll('.modal-close');
         
-        hostBtn.addEventListener('click', () => {
-            hostModal.style.display = 'flex';
-        });
-        
-        gigBtn.addEventListener('click', () => {
-            gigModal.style.display = 'flex';
-        });
+        function openModal(modal) {
+            modal.style.display = 'flex';
+            document.body.classList.add('modal-open');
+        }
 
+        function closeModal(modal) {
+            modal.style.display = 'none';
+            document.body.classList.remove('modal-open');
+        }
+
+        hostBtn.addEventListener('click', () => openModal(hostModal));
+        gigBtn.addEventListener('click', () => openModal(gigModal));
         aboutLink.addEventListener('click', (e) => {
             e.preventDefault();
-            aboutModal.style.display = 'flex';
+            openModal(aboutModal);
         });
-
         privacyLink.addEventListener('click', (e) => {
             e.preventDefault();
-            privacyModal.style.display = 'flex';
+            openModal(privacyModal);
         });
-
         contactUsLink.addEventListener('click', (e) => {
             e.preventDefault();
-            contactUsModal.style.display = 'flex';
+            openModal(contactUsModal);
         });
         
         closeButtons.forEach(button => {
             button.addEventListener('click', () => {
-                hostModal.style.display = 'none';
-                gigModal.style.display = 'none';
-                aboutModal.style.display = 'none';
-                privacyModal.style.display = 'none';
-                contactUsModal.style.display = 'none';
+                closeModal(hostModal);
+                closeModal(gigModal);
+                closeModal(aboutModal);
+                closeModal(privacyModal);
+                closeModal(contactUsModal);
             });
         });
         
         window.addEventListener('click', (e) => {
-            if (e.target === hostModal) hostModal.style.display = 'none';
-            if (e.target === gigModal) gigModal.style.display = 'none';
-            if (e.target === aboutModal) aboutModal.style.display = 'none';
-            if (e.target === privacyModal) privacyModal.style.display = 'none';
-            if (e.target === contactUsModal) contactUsModal.style.display = 'none';
+            if (e.target === hostModal) closeModal(hostModal);
+            if (e.target === gigModal) closeModal(gigModal);
+            if (e.target === aboutModal) closeModal(aboutModal);
+            if (e.target === privacyModal) closeModal(privacyModal);
+            if (e.target === contactUsModal) closeModal(contactUsModal);
         });
         
         const faqQuestions = document.querySelectorAll('.faq-question');
