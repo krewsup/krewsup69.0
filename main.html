@@ -34,17 +34,20 @@
             width: 100%;
             height: 100vh;
             z-index: 0;
+            opacity: 1;
         }
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
+            width: 100%;
         }
         header {
             padding: 30px 0;
             position: fixed;
             width: 100%;
             top: 0;
+            left: 0;
             z-index: 10;
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
@@ -56,6 +59,7 @@
             justify-content: space-between;
             align-items: center;
             position: relative;
+            width: 100%;
         }
         .logo img {
             width: 180px;
@@ -74,7 +78,7 @@
             font-size: 16px;
             text-transform: uppercase;
             position: relative;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
         .nav-links a::after {
             content: '';
@@ -91,6 +95,7 @@
         }
         .nav-links a:hover {
             color: #ccc;
+            transform: translateY(-2px);
         }
         .mobile-menu-btn {
             display: none;
@@ -99,7 +104,7 @@
             cursor: pointer;
             font-size: 28px;
             transition: transform 0.3s ease;
-            padding: 0 15px; /* Added padding for better click area */
+            padding: 0 15px;
         }
         .mobile-menu-btn:hover {
             transform: rotate(90deg);
@@ -115,16 +120,28 @@
             flex-direction: column;
             gap: 20px;
             z-index: 9;
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(-100%);
+        }
+        .mobile-nav.active {
+            transform: translateY(0);
         }
         .mobile-nav a {
             text-decoration: none;
             font-size: 18px;
             text-transform: uppercase;
             color: #fff;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        .mobile-nav.active a {
+            opacity: 1;
+            transform: translateX(0);
         }
         .mobile-nav a:hover {
             color: #ccc;
+            transform: translateX(5px);
         }
         .page {
             min-height: 100vh;
@@ -132,9 +149,16 @@
             padding: 200px 0 100px;
             position: relative;
             z-index: 2;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .page.active {
+            display: block;
+            opacity: 1;
         }
         #home-page {
             display: block;
+            opacity: 1;
         }
         .hero {
             display: flex;
@@ -327,7 +351,7 @@
             .mobile-menu-btn {
                 display: block;
                 position: absolute;
-                right: 20px; /* Adjusted position for better accessibility */
+                right: 20px;
             }
             .mobile-nav.active {
                 display: flex;
@@ -335,6 +359,7 @@
             #three-container {
                 width: 100%;
                 height: 100vh;
+                opacity: 0.3;
             }
             .hero-content {
                 max-width: 100%;
@@ -710,7 +735,7 @@
                 <a href="#contact-page" class="nav-link">Contact</a>
             </div>
         </header>
-        <section id="home-page" class="page">
+        <section id="home-page" class="page active">
             <div class="hero">
                 <div class="hero-content">
                     <h1>Connect.<br>Work.<br><span>Grow.</span></h1>
@@ -1342,20 +1367,35 @@
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const mobileNav = document.querySelector('.mobile-nav');
         
-        navLinks.forEach(link => {
+        navLinks.forEach((link, index) => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetId = link.getAttribute('href');
-                pages.forEach(page => page.style.display = 'none');
-                document.querySelector(targetId).style.display = 'block';
+                const targetPage = document.querySelector(targetId);
+                
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                setTimeout(() => {
+                    targetPage.classList.add('active');
+                }, 100);
+                
                 navLinks.forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
                 mobileNav.classList.remove('active');
+                
+                mobileNav.querySelectorAll('a').forEach((mobileLink, i) => {
+                    mobileLink.style.transitionDelay = `${i * 0.1}s`;
+                });
             });
         });
 
         mobileMenuBtn.addEventListener('click', () => {
             mobileNav.classList.toggle('active');
+            mobileNav.querySelectorAll('a').forEach((link, i) => {
+                link.style.transitionDelay = `${i * 0.1}s`;
+            });
         });
         
         const hostBtn = document.getElementById('host-btn');
