@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KrewsUp - Connect. Work. Grow.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KrewsUp - Brew. Your. Connections.</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
@@ -1204,7 +1204,7 @@
             color: 0xffffff,
             size: 0.5,
             transparent: true,
-            opacity: 0.9
+            opacity: 0.6
         });
         const snowSystem = new THREE.Points(snowGeometry, snowMaterial);
         scene.add(snowSystem);
@@ -1215,13 +1215,13 @@
         const glowMaterial = new THREE.MeshBasicMaterial({ 
             color: 0xffffff, 
             transparent: true, 
-            opacity: 0.8,
+            opacity: 0.6,
             blending: THREE.AdditiveBlending 
         });
         const lineMaterial = new THREE.LineBasicMaterial({ 
             color: 0xffffff, 
             transparent: true, 
-            opacity: 0.4,
+            opacity: 0.3,
             blending: THREE.AdditiveBlending 
         });
 
@@ -1258,7 +1258,7 @@
                 new THREE.MeshBasicMaterial({
                     color: 0xffffff,
                     transparent: true,
-                    opacity: 0.2,
+                    opacity: 0.15,
                     blending: THREE.AdditiveBlending
                 })
             );
@@ -1315,7 +1315,7 @@
                 pos.needsUpdate = true;
                 
                 const distance = nodes[line.node1].mesh.position.distanceTo(nodes[line.node2].mesh.position);
-                line.line.material.opacity = Math.max(0.2, 0.8 - distance * 0.01);
+                line.line.material.opacity = Math.max(0.15, 0.6 - distance * 0.01);
             });
 
             camera.position.x += (mouseX * 25 - camera.position.x) * 0.05;
