@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KrewsUp - Brew Your Connections. </title>
+    <title>KrewsUp - Brew Your Connections.</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
@@ -44,7 +44,7 @@
             padding: 0 20px;
         }
         header {
-            padding: 30px 20px;
+            padding: 20px;
             position: fixed;
             width: 100%;
             top: 0;
@@ -65,8 +65,8 @@
             padding: 0;
         }
         .logo img {
-            width: 180px;
-            height: 80px;
+            width: 150px;
+            height: 60px;
             transition: transform 0.5s ease;
         }
         .logo img:hover {
@@ -74,11 +74,11 @@
         }
         .nav-links {
             display: flex;
-            gap: 50px;
+            gap: 40px;
         }
         .nav-links a {
             text-decoration: none;
-            font-size: 16px;
+            font-size: 14px;
             text-transform: uppercase;
             position: relative;
             transition: color 0.3s ease;
@@ -104,13 +104,13 @@
             background: transparent;
             border: none;
             cursor: pointer;
-            font-size: 28px;
+            font-size: 24px;
             padding: 0 15px;
         }
         .mobile-nav {
             display: none;
             position: fixed;
-            top: 140px;
+            top: 100px;
             left: 0;
             width: 100%;
             background: rgba(0, 0, 0, 0.9);
@@ -121,7 +121,7 @@
         }
         .mobile-nav a {
             text-decoration: none;
-            font-size: 18px;
+            font-size: 16px;
             text-transform: uppercase;
             color: #fff;
             transition: color 0.3s ease;
@@ -132,7 +132,7 @@
         .page {
             min-height: 100vh;
             display: none;
-            padding: 200px 0 100px;
+            padding: 150px 0 100px;
             position: relative;
             z-index: 2;
         }
@@ -184,43 +184,50 @@
         }
         .btn {
             padding: 15px 35px;
-            border: 2px solid transparent;
-            background: linear-gradient(45deg, #FFFF00, #FFD700);
-            border-radius: 0;
+            border: none;
+            background: #fff;
+            border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             text-transform: uppercase;
             position: relative;
             overflow: hidden;
             z-index: 1;
             color: #000;
         }
-        #gig-btn {
-            background: linear-gradient(45deg, #4a978f, #87CEEB);
+        #host-btn:hover {
+            background: linear-gradient(135deg, #ffeb3b, #ff9800);
+            color: #000;
         }
-        .btn:before {
+        #gig-btn {
+            background: #fff;
+            color: #000;
+        }
+        #gig-btn:hover {
+            background: linear-gradient(135deg, #4a978f, #2e665f);
+            color: #000;
+        }
+        .btn::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(45deg, #FFFF66, #FFA500);
-            transition: all 0.4s ease;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
             z-index: -1;
         }
-        #gig-btn:before {
-            background: linear-gradient(45deg, #5ab9b0, #00CED1);
-        }
-        .btn:hover:before {
-            width: 100%;
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
         .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05) translateY(-5px);
         }
         .section-title {
             font-size: 48px;
@@ -292,34 +299,108 @@
             opacity: 0.8;
         }
         footer {
-            padding: 60px 0;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 80px 0 40px;
+            background: rgba(0, 0, 0, 0.9);
             position: relative;
             z-index: 2;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            position: relative;
+        }
+        .footer-company {
+            position: relative;
+        }
+        .footer-company h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            white-space: nowrap;
+        }
+        .footer-company p {
+            opacity: 0.8;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .footer-links-group h4 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+        .footer-links-group h4::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+        .footer-links-group:hover h4::after {
+            width: 100%;
         }
         .footer-links {
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
+            flex-direction: column;
+            gap: 15px;
         }
         .footer-links a {
             text-decoration: none;
             font-size: 16px;
             opacity: 0.7;
             transition: all 0.3s ease;
+            position: relative;
         }
         .footer-links a:hover {
             opacity: 1;
-            transform: scale(1.1);
+            padding-left: 15px;
+        }
+        .footer-links a::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .footer-links a:hover::before {
+            opacity: 1;
+        }
+        .footer-social {
+            display: flex;
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        .footer-social a:hover {
+            transform: scale(1.2);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(255,255,255,0.2);
         }
         .copyright {
+            text-align: center;
             font-size: 14px;
             opacity: 0.6;
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
         }
         @media (max-width: 768px) {
             h1 {
@@ -351,7 +432,16 @@
             }
             .logo img {
                 width: 120px;
-                height: 60px;
+                height: 50px;
+            }
+            .footer-container {
+                text-align: center;
+            }
+            .footer-social {
+                justify-content: center;
+            }
+            .footer-company h3 {
+                font-size: 24px;
             }
         }
         .steps {
@@ -535,14 +625,14 @@
         }
         .app-buttons {
             display: flex;
-            gap: 15px;
-            margin-top: 30px;
+            gap: 25px;
+            margin-top: 40px;
         }
         .app-btn {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 12px 20px;
+            padding: 15px 35px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 8px;
@@ -556,18 +646,18 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
         .app-btn-icon {
-            font-size: 24px;
+            font-size: 18px;
         }
         .app-btn-content {
             display: flex;
             flex-direction: column;
         }
         .app-btn-label {
-            font-size: 12px;
+            font-size: 10px;
             opacity: 0.8;
         }
         .app-btn-name {
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 600;
         }
         .app-btn-tooltip {
@@ -586,6 +676,7 @@
             font-weight: 600;
             text-align: center;
             padding: 0 10px;
+            font-size: 12px;
         }
         .app-btn:hover .app-btn-tooltip {
             opacity: 1;
@@ -677,12 +768,16 @@
             }
             .app-buttons {
                 flex-direction: column;
+                gap: 15px;
             }
             .modal-content {
                 padding: 30px;
             }
             .modal-title {
                 font-size: 28px;
+            }
+            .buttons {
+                flex-direction: column;
             }
         }
         .ripple {
@@ -740,7 +835,7 @@
                     <a href="#why-us-page" class="nav-link">Why Us</a>
                     <a href="#how-page" class="nav-link">How It Works</a>
                     <a href="#customers-page" class="nav-link">Customers</a>
-                    <a href="#contact-page" class="nav-link">Contact</a>
+                    <a href="#faq-page" class="nav-link">FAQ</a>
                 </div>
                 <button class="mobile-menu-btn">☰</button>
             </nav>
@@ -749,7 +844,7 @@
                 <a href="#why-us-page" class="nav-link">Why Us</a>
                 <a href="#how-page" class="nav-link">How It Works</a>
                 <a href="#customers-page" class="nav-link">Customers</a>
-                <a href="#contact-page" class="nav-link">Contact</a>
+                <a href="#faq-page" class="nav-link">FAQ</a>
             </div>
         </header>
         <section id="home-page" class="page">
@@ -765,7 +860,7 @@
                     <div class="app-buttons">
                         <div class="app-btn">
                             <div class="app-btn-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.09 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z" fill="white"/>
                                 </svg>
                             </div>
@@ -777,7 +872,7 @@
                         </div>
                         <div class="app-btn">
                             <div class="app-btn-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M3.60938 3.15234C3.29688 3.48047 3.125 3.99609 3.125 4.67969V19.3203C3.125 20.0039 3.29688 20.5195 3.60938 20.8477L3.70312 20.9414L13.1016 11.543V11.4414L3.70312 2.05859L3.60938 3.15234Z" fill="white"/>
                                     <path d="M17.168 15.6094L13.1016 11.543V11.4414L17.168 7.37499L17.2852 7.44921L22.0117 10.0547C23.4023 10.8555 23.4023 12.1289 22.0117 12.9297L17.2852 15.5352L17.168 15.6094Z" fill="white"/>
                                     <path d="M17.2852 15.5352L13.1016 11.5L3.60938 20.8477C4.0625 21.3281 4.78125 21.3867 5.5625 20.9297L17.2852 15.5352Z" fill="white"/>
@@ -944,31 +1039,11 @@
                 </div>
             </div>
         </section>
-        <section id="contact-page" class="page">
+        <section id="faq-page" class="page">
             <div class="title-container">
-                <h2 class="section-title">Get In Touch</h2>
-            </div>
-            <div class="contact-form">
-                <div class="form-group">
-                    <label class="form-label">Name</label>
-                    <input type="text" class="form-input" placeholder="Your name">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-input" placeholder="Your email">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Subject</label>
-                    <input type="text" class="form-input" placeholder="Subject">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Message</label>
-                    <textarea class="form-input" placeholder="Your message"></textarea>
-                </div>
-                <button class="btn">Send Message</button>
+                <h2 class="section-title">Frequently Asked Questions</h2>
             </div>
             <div class="faq">
-                <h3 style="margin-bottom: 30px; text-align: center; font-size: 32px;">Frequently Asked Questions</h3>
                 <div class="faq-item">
                     <div class="faq-question">How do I sign up as a gig worker?</div>
                     <div class="faq-answer">
@@ -1094,43 +1169,66 @@
                 <p class="modal-subtitle">Your privacy matters to us</p>
                 <div class="feature-list">
                     <div class="feature-item">
-                        <span class="feature-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+                        <span class="feature-text">KrewsUp collects only essential personal data necessary for gig matching and verification processes.</span>
                     </div>
                     <div class="feature-item">
-                        <span class="feature-text">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                        <span class="feature-text">Your information is protected with bank-grade encryption and never shared with third parties without consent.</span>
                     </div>
                     <div class="feature-item">
-                        <span class="feature-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</span>
+                        <span class="feature-text">Users have full control over their data with options to update, export, or delete profiles at any time.</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal" id="contact-us-modal">
+        <div class="modal" id="terms-modal">
             <div class="modal-content">
                 <span class="modal-close">×</span>
-                <h3 class="modal-title">Contact Us</h3>
-                <p class="modal-subtitle">Reach out to us anytime</p>
+                <h3 class="modal-title">Terms & Conditions</h3>
+                <p class="modal-subtitle">Our terms of service</p>
                 <div class="feature-list">
                     <div class="feature-item">
-                        <span class="feature-text">Email: raghav@krewsup.com</span>
+                        <span class="feature-text">All users must be 18+ and provide valid government ID for verification.</span>
                     </div>
                     <div class="feature-item">
-                        <span class="feature-text">Phone: +91 8296058467</span>
+                        <span class="feature-text">Gig payments are processed within 24 hours, subject to verification and dispute resolution policies.</span>
                     </div>
                     <div class="feature-item">
-                        <span class="feature-text">Available 24/7 for your support</span>
+                        <span class="feature-text">KrewsUp reserves the right to suspend accounts violating community guidelines or engaging in fraudulent activities.</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <footer>
-        <div class="footer-links">
-            <a href="#" id="about-link">About Us</a>
-            <a href="#" id="privacy-link">Privacy Policy</a>
-            <a href="#" id="contact-us-link">Contact Us</a>
+        <div id="footer-three-container"></div>
+        <div class="footer-container">
+            <div class="footer-company">
+                <h3>KrewsUp Technologies Private <br> Limited </h3>
+                <p>Empowering India's gig economy with innovative solutions since 2025</p>
+                <div class="footer-social">
+                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5c0 1.381 1.11 2.5 2.48 2.5s2.48-1.119 2.48-2.5c0-1.38-1.11-2.5-2.48-2.5s-2.48 1.12-2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/></svg></a>
+                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.703-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.072-1.689.072-4.948 0-3.259-.013-3.67-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-links-group">
+                <h4>Contact</h4>
+                <div class="footer-links">
+                    <a href="#">support@krewsup.com</a>
+                    <a href="#">+91-22-1234-5678</a>
+                    <a href="#">Mumbai, MH, India</a>
+                </div>
+            </div>
+            <div class="footer-links-group">
+                <h4>Policies</h4>
+                <div class="footer-links">
+                    <a href="#" id="about-link">About Us</a>
+                    <a href="#" id="privacy-link">Privacy Policy</a>
+                    <a href="#" id="terms-link">Terms & Conditions</a>
+                </div>
+            </div>
         </div>
-        <p class="copyright">© 2025 KrewsUp. All rights reserved.</p>
+        <p class="copyright">© 2025 KrewsUp Technologies Private Limited. All Rights Reserved.</p>
     </footer>
     <script>
         const canvas = document.getElementById('bg-canvas');
@@ -1206,6 +1304,7 @@
             cursorDot.style.top = e.clientY + 'px';
         });
         
+        // Main Three.js container (background with snow)
         const threeContainer = document.getElementById('three-container');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -1308,6 +1407,47 @@
 
         camera.position.z = 70;
 
+        // Footer Three.js container
+        const footerThreeContainer = document.getElementById('footer-three-container');
+        const footerScene = new THREE.Scene();
+        const footerCamera = new THREE.PerspectiveCamera(75, window.innerWidth / 300, 0.1, 1000);
+        const footerRenderer = new THREE.WebGLRenderer({ alpha: true });
+        footerRenderer.setSize(window.innerWidth, 300);
+        footerThreeContainer.appendChild(footerRenderer.domElement);
+        footerThreeContainer.style.position = 'absolute';
+        footerThreeContainer.style.top = '0';
+        footerThreeContainer.style.left = '0';
+        footerThreeContainer.style.width = '100%';
+        footerThreeContainer.style.height = '100%';
+        footerThreeContainer.style.zIndex = '0';
+
+        // Footer animation - wave-like particles
+        const footerParticles = [];
+        const particleCount = 50;
+        const footerGeometry = new THREE.BufferGeometry();
+        const footerVertices = new Float32Array(particleCount * 3);
+        const footerMaterial = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 0.8,
+            transparent: true,
+            opacity: 0.4,
+            blending: THREE.AdditiveBlending
+        });
+        for (let i = 0; i < particleCount; i++) {
+            const x = (Math.random() - 0.5) * 100;
+            const y = (Math.random() - 0.5) * 20;
+            const z = (Math.random() - 0.5) * 50;
+            footerParticles.push({ x, y, z, baseY: y });
+            const j = i * 3;
+            footerVertices[j] = x;
+            footerVertices[j + 1] = y;
+            footerVertices[j + 2] = z;
+        }
+        footerGeometry.setAttribute('position', new THREE.BufferAttribute(footerVertices, 3));
+        const footerParticleSystem = new THREE.Points(footerGeometry, footerMaterial);
+        footerScene.add(footerParticleSystem);
+        footerCamera.position.z = 30;
+
         let mouseX = 0, mouseY = 0;
         document.addEventListener('mousemove', (e) => {
             mouseX = (e.clientX / window.innerWidth) * 2 - 1;
@@ -1317,6 +1457,7 @@
         function animate3D() {
             requestAnimationFrame(animate3D);
 
+            // Main scene animation (snow and nodes)
             for (let i = 0, j = 0; i < snowflakes.length; i++, j += 3) {
                 snowflakes[i].update();
                 snowVertices[j] = snowflakes[i].x;
@@ -1361,7 +1502,22 @@
             camera.position.y += (mouseY * 25 - camera.position.y) * 0.05;
             camera.lookAt(scene.position);
 
+            // Footer animation - wave-like particles
+            const time = Date.now() * 0.001;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = footerParticles[i];
+                const j = i * 3;
+                particle.y = particle.baseY + Math.sin(time + particle.x * 0.1) * 5;
+                footerVertices[j] = particle.x;
+                footerVertices[j + 1] = particle.y;
+                footerVertices[j + 2] = particle.z;
+            }
+            footerGeometry.setAttribute('position', new THREE.BufferAttribute(footerVertices, 3));
+            footerCamera.position.x += (mouseX * 10 - footerCamera.position.x) * 0.05;
+            footerCamera.lookAt(footerScene.position);
+
             renderer.render(scene, camera);
+            footerRenderer.render(footerScene, footerCamera);
         }
 
         snowGeometry.setAttribute('position', new THREE.BufferAttribute(snowVertices, 3));
@@ -1377,6 +1533,10 @@
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            footerCamera.aspect = window.innerWidth / 300;
+            footerCamera.updateProjectionMatrix();
+            footerRenderer.setSize(window.innerWidth, 300);
         });
 
         const navLinks = document.querySelectorAll('.nav-link');
@@ -1389,10 +1549,12 @@
                 e.preventDefault();
                 const targetId = link.getAttribute('href');
                 pages.forEach(page => page.style.display = 'none');
-                document.querySelector(targetId).style.display = 'block';
+                const targetPage = document.querySelector(targetId);
+                targetPage.style.display = 'block';
                 navLinks.forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
                 mobileNav.classList.remove('active');
+                window.scrollTo(0, 0);
             });
         });
 
@@ -1406,10 +1568,10 @@
         const gigModal = document.getElementById('gig-modal');
         const aboutLink = document.getElementById('about-link');
         const privacyLink = document.getElementById('privacy-link');
-        const contactUsLink = document.getElementById('contact-us-link');
+        const termsLink = document.getElementById('terms-link');
         const aboutModal = document.getElementById('about-modal');
         const privacyModal = document.getElementById('privacy-modal');
-        const contactUsModal = document.getElementById('contact-us-modal');
+        const termsModal = document.getElementById('terms-modal');
         const closeButtons = document.querySelectorAll('.modal-close');
         
         function openModal(modal) {
@@ -1432,9 +1594,9 @@
             e.preventDefault();
             openModal(privacyModal);
         });
-        contactUsLink.addEventListener('click', (e) => {
+        termsLink.addEventListener('click', (e) => {
             e.preventDefault();
-            openModal(contactUsModal);
+            openModal(termsModal);
         });
         
         closeButtons.forEach(button => {
@@ -1443,7 +1605,7 @@
                 closeModal(gigModal);
                 closeModal(aboutModal);
                 closeModal(privacyModal);
-                closeModal(contactUsModal);
+                closeModal(termsModal);
             });
         });
         
@@ -1452,7 +1614,7 @@
             if (e.target === gigModal) closeModal(gigModal);
             if (e.target === aboutModal) closeModal(aboutModal);
             if (e.target === privacyModal) closeModal(privacyModal);
-            if (e.target === contactUsModal) closeModal(contactUsModal);
+            if (e.target === termsModal) closeModal(termsModal);
         });
         
         const faqQuestions = document.querySelectorAll('.faq-question');
