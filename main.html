@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KrewsUp - Brew Your Connections. </title>
+    <title>KrewsUp - Connect. Work. Grow.</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
@@ -355,21 +355,9 @@
             text-decoration: none;
             font-size: 16px;
             opacity: 0.7;
-            transition: all 0.3s ease;
-            position: relative;
+            transition: opacity 0.3s ease;
         }
         .footer-links a:hover {
-            opacity: 1;
-            padding-left: 15px;
-        }
-        .footer-links a::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-        .footer-links a:hover::before {
             opacity: 1;
         }
         .footer-social {
@@ -391,8 +379,16 @@
         }
         .footer-social a:hover {
             transform: scale(1.2);
-            background: rgba(255, 255, 255, 0.2);
             box-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+        .footer-social a.twitter:hover {
+            background: #1DA1F2;
+        }
+        .footer-social a.linkedin:hover {
+            background: #0A66C2;
+        }
+        .footer-social a.instagram:hover {
+            background: #E4405F;
         }
         .copyright {
             text-align: center;
@@ -817,6 +813,63 @@
                 border-width: 0px;
             }
         }
+        .growth-pattern {
+            position: absolute;
+            right: 50px;
+            top: 40%;
+            transform: translateY(-50%);
+            width: 350px;
+            height: 400px;
+            z-index: 3;
+        }
+        .growth-icon {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            opacity: 0.9;
+            animation: float 4s ease-in-out infinite;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            transition: transform 0.3s ease;
+        }
+        .growth-icon:hover {
+            transform: rotate(360deg);
+        }
+        .growth-icon.rupee {
+            top: 0;
+            left: 150px;
+            color: #4CAF50;
+            animation-delay: 0s;
+        }
+        .growth-icon.growth {
+            top: 150px;
+            left: 50px;
+            color: #4CAF50;
+            animation-delay: 1s;
+        }
+        .growth-icon.chart {
+            top: 300px;
+            left: 200px;
+            color: #00E5FF;
+            animation-delay: 2s;
+        }
+        .growth-icon.network {
+            top: 100px;
+            left: 250px;
+            color: #FFD700;
+            animation-delay: 3s;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+            100% { transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            .growth-pattern {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -886,6 +939,12 @@
                             <div class="app-btn-tooltip">Coming soon! We're working hard to launch</div>
                         </div>
                     </div>
+                </div>
+                <div class="growth-pattern">
+                    <div class="growth-icon rupee">₹</div>
+                    <div class="growth-icon growth">📈</div>
+                    <div class="growth-icon chart">📊</div>
+                    <div class="growth-icon network">🌐</div>
                 </div>
             </div>
             <div class="testimonials">
@@ -1206,9 +1265,9 @@
                 <h3>KrewsUp Tech Pvt Ltd </h3>
                 <p>Empowering India's gig economy with innovative solutions </p>
                 <div class="footer-social">
-                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5c0 1.381 1.11 2.5 2.48 2.5s2.48-1.119 2.48-2.5c0-1.38-1.11-2.5-2.48-2.5s-2.48 1.12-2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/></svg></a>
-                    <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.703-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.072-1.689.072-4.948 0-3.259-.013-3.67-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                    <a href="#" class="twitter"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                    <a href="#" class="linkedin"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.067 0-1.14.92-2.066 2.063-2.066 1.14 0 2.066.926 2.066 2.066 0 1.141-.926 2.067-2.066 2.067zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    <a href="#" class="instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.703-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.072-1.689.072-4.948 0-3.259-.013-3.67-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
                 </div>
             </div>
             <div class="footer-links-group">
@@ -1216,7 +1275,7 @@
                 <div class="footer-links">
                     <a>raghav@krewsup.com</a>
                     <a>+91-8296058467</a>
-                    <a>G2-401, Shriram Shreyas Apartments, Kodigehalli, Telecomlayout, Vidyaranyapura, Bangalore-560097, Karnataka, India. 
+                    <a>G2-401, Shriram Shreyas Apartments, Kodigehalli, Telecomlayout, Vidyaranyapura, Bangalore-560097, Karnataka, India, 
                         </a>
                 </div>
             </div>
@@ -1248,10 +1307,10 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                this.opacity = Math.random() * 0.5 + 0.1;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.8 - 0.4;
+                this.speedY = Math.random() * 0.8 - 0.4;
+                this.opacity = Math.random() * 0.6 + 0.2;
             }
             
             update() {
@@ -1277,7 +1336,7 @@
         
         function initParticles() {
             particles = [];
-            const particleCount = Math.min(100, Math.floor(canvas.width * canvas.height / 8000));
+            const particleCount = Math.min(150, Math.floor(canvas.width * canvas.height / 6000));
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
@@ -1305,7 +1364,6 @@
             cursorDot.style.top = e.clientY + 'px';
         });
         
-        // Main Three.js container (background with snow)
         const threeContainer = document.getElementById('three-container');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -1319,8 +1377,8 @@
                 this.x = (Math.random() - 0.5) * 200;
                 this.y = Math.random() * 100 + 50;
                 this.z = (Math.random() - 0.5) * 200;
-                this.size = Math.random() * 0.5 + 0.2;
-                this.speed = Math.random() * 0.5 + 0.2;
+                this.size = Math.random() * 0.8 + 0.4;
+                this.speed = Math.random() * 0.3 + 0.1;
             }
 
             update() {
@@ -1333,7 +1391,7 @@
             }
         }
 
-        for (let i = 0; i < 150; i++) {
+        for (let i = 0; i < 200; i++) {
             snowflakes.push(new Snowflake());
         }
 
@@ -1341,35 +1399,35 @@
         const snowVertices = new Float32Array(snowflakes.length * 3);
         const snowMaterial = new THREE.PointsMaterial({
             color: 0xffffff,
-            size: 0.5,
+            size: 0.8,
             transparent: true,
-            opacity: 0.6
+            opacity: 0.7
         });
         const snowSystem = new THREE.Points(snowGeometry, snowMaterial);
         scene.add(snowSystem);
 
         const nodes = [];
-        const nodeCount = 15;
-        const nodeGeometry = new THREE.SphereGeometry(0.4, 16, 16);
+        const nodeCount = 20;
+        const nodeGeometry = new THREE.SphereGeometry(0.6, 16, 16);
         const glowMaterial = new THREE.MeshBasicMaterial({ 
             color: 0xffffff, 
             transparent: true, 
-            opacity: 0.6,
+            opacity: 0.7,
             blending: THREE.AdditiveBlending 
         });
         const lineMaterial = new THREE.LineBasicMaterial({ 
             color: 0xffffff, 
             transparent: true, 
-            opacity: 0.3,
+            opacity: 0.4,
             blending: THREE.AdditiveBlending 
         });
 
         for (let i = 0; i < nodeCount; i++) {
             const node = new THREE.Mesh(nodeGeometry, glowMaterial);
             node.position.set(
-                (Math.random() - 0.5) * 60,
-                (Math.random() - 0.5) * 60,
-                (Math.random() - 0.5) * 60
+                (Math.random() - 0.5) * 80,
+                (Math.random() - 0.5) * 80,
+                (Math.random() - 0.5) * 80
             );
             nodes.push({ mesh: node, velocity: new THREE.Vector3() });
             scene.add(node);
@@ -1378,7 +1436,7 @@
         const lines = [];
         for (let i = 0; i < nodeCount; i++) {
             for (let j = i + 1; j < nodeCount; j++) {
-                if (Math.random() > 0.9) {
+                if (Math.random() > 0.85) {
                     const geometry = new THREE.BufferGeometry().setFromPoints([
                         nodes[i].mesh.position,
                         nodes[j].mesh.position
@@ -1393,11 +1451,11 @@
         const glowGroup = new THREE.Group();
         for (let i = 0; i < nodeCount; i++) {
             const glow = new THREE.Mesh(
-                new THREE.SphereGeometry(1, 16, 16),
+                new THREE.SphereGeometry(1.5, 16, 16),
                 new THREE.MeshBasicMaterial({
                     color: 0xffffff,
                     transparent: true,
-                    opacity: 0.15,
+                    opacity: 0.2,
                     blending: THREE.AdditiveBlending
                 })
             );
@@ -1406,9 +1464,8 @@
         }
         scene.add(glowGroup);
 
-        camera.position.z = 70;
+        camera.position.z = 90;
 
-        // Footer Three.js container
         const footerThreeContainer = document.getElementById('footer-three-container');
         const footerScene = new THREE.Scene();
         const footerCamera = new THREE.PerspectiveCamera(75, window.innerWidth / 300, 0.1, 1000);
@@ -1422,22 +1479,21 @@
         footerThreeContainer.style.height = '100%';
         footerThreeContainer.style.zIndex = '0';
 
-        // Footer animation - wave-like particles
         const footerParticles = [];
-        const particleCount = 50;
+        const particleCount = 75;
         const footerGeometry = new THREE.BufferGeometry();
         const footerVertices = new Float32Array(particleCount * 3);
         const footerMaterial = new THREE.PointsMaterial({
             color: 0xffffff,
-            size: 0.8,
+            size: 1,
             transparent: true,
-            opacity: 0.4,
+            opacity: 0.5,
             blending: THREE.AdditiveBlending
         });
         for (let i = 0; i < particleCount; i++) {
-            const x = (Math.random() - 0.5) * 100;
-            const y = (Math.random() - 0.5) * 20;
-            const z = (Math.random() - 0.5) * 50;
+            const x = (Math.random() - 0.5) * 120;
+            const y = (Math.random() - 0.5) * 25;
+            const z = (Math.random() - 0.5) * 60;
             footerParticles.push({ x, y, z, baseY: y });
             const j = i * 3;
             footerVertices[j] = x;
@@ -1447,7 +1503,7 @@
         footerGeometry.setAttribute('position', new THREE.BufferAttribute(footerVertices, 3));
         const footerParticleSystem = new THREE.Points(footerGeometry, footerMaterial);
         footerScene.add(footerParticleSystem);
-        footerCamera.position.z = 30;
+        footerCamera.position.z = 35;
 
         let mouseX = 0, mouseY = 0;
         document.addEventListener('mousemove', (e) => {
@@ -1458,7 +1514,6 @@
         function animate3D() {
             requestAnimationFrame(animate3D);
 
-            // Main scene animation (snow and nodes)
             for (let i = 0, j = 0; i < snowflakes.length; i++, j += 3) {
                 snowflakes[i].update();
                 snowVertices[j] = snowflakes[i].x;
@@ -1471,15 +1526,15 @@
                 const time = Date.now() * 0.001;
                 node.velocity.add(
                     new THREE.Vector3(
-                        Math.sin(time + i) * 0.01,
-                        Math.cos(time + i * 0.5) * 0.01,
-                        Math.sin(time + i * 0.3) * 0.01
+                        Math.sin(time + i) * 0.015,
+                        Math.cos(time + i * 0.5) * 0.015,
+                        Math.sin(time + i * 0.3) * 0.015
                     )
                 );
                 node.velocity.multiplyScalar(0.95);
                 node.mesh.position.add(node.velocity);
                 
-                const scale = 0.8 + Math.sin(time + i) * 0.3;
+                const scale = 0.9 + Math.sin(time + i) * 0.4;
                 node.mesh.scale.setScalar(scale);
                 glowGroup.children[i].scale.setScalar(scale * 2);
                 glowGroup.children[i].position.copy(node.mesh.position);
@@ -1496,25 +1551,24 @@
                 pos.needsUpdate = true;
                 
                 const distance = nodes[line.node1].mesh.position.distanceTo(nodes[line.node2].mesh.position);
-                line.line.material.opacity = Math.max(0.15, 0.6 - distance * 0.01);
+                line.line.material.opacity = Math.max(0.2, 0.7 - distance * 0.01);
             });
 
-            camera.position.x += (mouseX * 25 - camera.position.x) * 0.05;
-            camera.position.y += (mouseY * 25 - camera.position.y) * 0.05;
+            camera.position.x += (mouseX * 30 - camera.position.x) * 0.05;
+            camera.position.y += (mouseY * 30 - camera.position.y) * 0.05;
             camera.lookAt(scene.position);
 
-            // Footer animation - wave-like particles
             const time = Date.now() * 0.001;
             for (let i = 0; i < particleCount; i++) {
                 const particle = footerParticles[i];
                 const j = i * 3;
-                particle.y = particle.baseY + Math.sin(time + particle.x * 0.1) * 5;
+                particle.y = particle.baseY + Math.sin(time + particle.x * 0.15) * 6;
                 footerVertices[j] = particle.x;
                 footerVertices[j + 1] = particle.y;
                 footerVertices[j + 2] = particle.z;
             }
             footerGeometry.setAttribute('position', new THREE.BufferAttribute(footerVertices, 3));
-            footerCamera.position.x += (mouseX * 10 - footerCamera.position.x) * 0.05;
+            footerCamera.position.x += (mouseX * 12 - footerCamera.position.x) * 0.05;
             footerCamera.lookAt(footerScene.position);
 
             renderer.render(scene, camera);
