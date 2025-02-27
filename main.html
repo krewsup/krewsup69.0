@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KrewsUp - Connect. Work. Grow.</title>
+    <title>KrewsUp - Brew Your Connections.</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
@@ -272,6 +272,12 @@
             transition: all 0.4s ease;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         .card:hover {
             transform: translateY(-10px) scale(1.02);
@@ -447,6 +453,13 @@
             display: flex;
             margin-bottom: 50px;
             position: relative;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+        .step.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
         .step-number {
             font-size: 120px;
@@ -479,6 +492,19 @@
         }
         .step:last-child::after {
             display: none;
+        }
+        @media (max-width: 768px) {
+            .step {
+                flex-direction: column;
+            }
+            .step-number {
+                font-size: 80px;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            .step::after {
+                display: none;
+            }
         }
         .testimonials {
             margin: 80px 0;
@@ -701,14 +727,8 @@
             animation: modalFadeIn 0.4s ease forwards;
         }
         @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .modal-close {
             position: absolute;
@@ -748,33 +768,11 @@
             line-height: 1.5;
         }
         @media (max-width: 768px) {
-            .step {
-                flex-direction: column;
-            }
-            .step-number {
-                font-size: 80px;
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-            .step::after {
-                display: none;
-            }
-            .cursor, .cursor-dot {
-                display: none;
-            }
-            .app-buttons {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .modal-content {
-                padding: 30px;
-            }
-            .modal-title {
-                font-size: 28px;
-            }
-            .buttons {
-                flex-direction: column;
-            }
+            .cursor, .cursor-dot { display: none; }
+            .app-buttons { flex-direction: column; gap: 15px; }
+            .modal-content { padding: 30px; }
+            .modal-title { font-size: 28px; }
+            .buttons { flex-direction: column; }
         }
         .ripple {
             position: fixed;
@@ -787,31 +785,11 @@
             z-index: 999;
         }
         @keyframes ripple {
-            0% {
-                transform: scale(0) rotate(0deg);
-                opacity: 1;
-                border-width: 2px;
-            }
-            25% {
-                transform: scale(1.5) rotate(10deg);
-                opacity: 0.8;
-                border-width: 3px;
-            }
-            50% {
-                transform: scale(3) rotate(-15deg);
-                opacity: 0.6;
-                border-width: 2px;
-            }
-            75% {
-                transform: scale(4.5) rotate(10deg);
-                opacity: 0.3;
-                border-width: 1px;
-            }
-            100% {
-                transform: scale(6) rotate(0deg);
-                opacity: 0;
-                border-width: 0px;
-            }
+            0% { transform: scale(0) rotate(0deg); opacity: 1; border-width: 2px; }
+            25% { transform: scale(1.5) rotate(10deg); opacity: 0.8; border-width: 3px; }
+            50% { transform: scale(3) rotate(-15deg); opacity: 0.6; border-width: 2px; }
+            75% { transform: scale(4.5) rotate(10deg); opacity: 0.3; border-width: 1px; }
+            100% { transform: scale(6) rotate(0deg); opacity: 0; border-width: 0px; }
         }
         .growth-pattern {
             position: absolute;
@@ -832,43 +810,67 @@
             animation: float 4s ease-in-out infinite;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
         }
-        .growth-icon.rupee {
-            top: 0;
-            left: 150px;
-            color: #4CAF50;
-            animation-delay: 0s;
-        }
-        .growth-icon.growth {
-            top: 150px;
-            left: 50px;
-            color: #4CAF50;
-            animation-delay: 1s;
-        }
-        .growth-icon.chart {
-            top: 300px;
-            left: 200px;
-            color: #00E5FF;
-            animation-delay: 2s;
-        }
-        .growth-icon.network {
-            top: 100px;
-            left: 250px;
-            color: #FFD700;
-            animation-delay: 3s;
-        }
+        .growth-icon.rupee { top: 0; left: 150px; color: #4CAF50; animation-delay: 0s; }
+        .growth-icon.growth { top: 150px; left: 50px; color: #4CAF50; animation-delay: 1s; }
+        .growth-icon.chart { top: 300px; left: 200px; color: #00E5FF; animation-delay: 2s; }
+        .growth-icon.network { top: 100px; left: 250px; color: #FFD700; animation-delay: 3s; }
         @keyframes float {
             0% { transform: translateY(0); }
             50% { transform: translateY(-30px); }
             100% { transform: translateY(0); }
         }
         @media (max-width: 768px) {
-            .growth-pattern {
-                display: none;
-            }
+            .growth-pattern { display: none; }
+        }
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        #loading-canvas {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #loading-text {
+            font-size: 24px;
+            font-weight: 700;
+            position: absolute;
+            top: 65%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            text-transform: uppercase;
+            z-index: 1001;
+            text-shadow: 0 0 10px #000;
+        }
+        #percentage {
+            font-size: 48px;
+            font-weight: 700;
+            position: absolute;
+            top: 75%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            z-index: 1001;
+            text-shadow: 0 0 10px #000;
         }
     </style>
 </head>
 <body>
+    <div id="loading-screen">
+        <canvas id="loading-canvas"></canvas>
+        <div id="loading-text">KrewsUp - 🚀 Brew Your Connections 🚀  </div>
+        <div id="percentage">0%</div>
+    </div>
     <canvas id="bg-canvas"></canvas>
     <div id="three-container"></div>
     <div class="cursor"></div>
@@ -1271,8 +1273,7 @@
                 <div class="footer-links">
                     <a>raghav@krewsup.com</a>
                     <a>+91-8296058467</a>
-                    <a>G2-401, Shriram Shreyas Apartments, Kodigehalli, Telecomlayout, Vidyaranyapura, Bangalore-560097, Karnataka, India, 
-                        </a>
+                    <a>G2-401, Shriram Shreyas Apartments, Kodigehalli, Telecomlayout, Vidyaranyapura, Bangalore-560097, Karnataka, India</a>
                 </div>
             </div>
             <div class="footer-links-group">
@@ -1287,18 +1288,101 @@
         <p class="copyright">© 2025 KrewsUp Technologies Private Limited.<br> All Rights Reserved.</p>
     </footer>
     <script>
+        const loadingScreen = document.getElementById('loading-screen');
+        const loadingCanvas = document.getElementById('loading-canvas');
+        const loadingText = document.getElementById('loading-text');
+        const percentageText = document.getElementById('percentage');
+        const websiteContent = document.querySelectorAll('body > *:not(#loading-screen)');
+        websiteContent.forEach(el => el.style.display = 'none');
+
+        loadingCanvas.width = 400;
+        loadingCanvas.height = 400;
+        const loadingScene = new THREE.Scene();
+        const loadingCamera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+        const loadingRenderer = new THREE.WebGLRenderer({ canvas: loadingCanvas, alpha: true });
+        loadingRenderer.setSize(400, 400);
+
+        const loadingGeometry = new THREE.BufferGeometry();
+        const loadingVertices = [];
+        const loadingParticleCount = 300;
+        for (let i = 0; i < loadingParticleCount; i++) {
+            const x = (Math.random() - 0.5) * 150;
+            const y = (Math.random() - 0.5) * 150;
+            const z = (Math.random() - 0.5) * 150;
+            loadingVertices.push(x, y, z);
+        }
+        loadingGeometry.setAttribute('position', new THREE.Float32BufferAttribute(loadingVertices, 3));
+        const loadingMaterial = new THREE.PointsMaterial({ size: 1, color: 0x00ffcc, transparent: true, opacity: 0.7 });
+        const loadingParticles = new THREE.Points(loadingGeometry, loadingMaterial);
+        loadingScene.add(loadingParticles);
+
+        const loadingLines = [];
+        for (let i = 0; i < 50; i++) {
+            const lineGeometry = new THREE.BufferGeometry().setFromPoints([
+                new THREE.Vector3(loadingVertices[i * 3], loadingVertices[i * 3 + 1], loadingVertices[i * 3 + 2]),
+                new THREE.Vector3(loadingVertices[(i + 1) * 3 % (loadingParticleCount * 3)], loadingVertices[(i + 1) * 3 + 1 % (loadingParticleCount * 3)], loadingVertices[(i + 1) * 3 + 2 % (loadingParticleCount * 3)])
+            ]);
+            const lineMaterial = new THREE.LineBasicMaterial({ color: 0x00ffcc, transparent: true, opacity: 0.3 });
+            const line = new THREE.Line(lineGeometry, lineMaterial);
+            loadingLines.push(line);
+            loadingScene.add(line);
+        }
+
+        loadingCamera.position.z = 100;
+
+        let loadingPercentage = 0;
+        function animateLoading() {
+            requestAnimationFrame(animateLoading);
+
+            const positions = loadingParticles.geometry.attributes.position.array;
+            for (let i = 0; i < loadingParticleCount * 3; i += 3) {
+                positions[i] += Math.sin(Date.now() * 0.002 + i) * 0.05;
+                positions[i + 1] += Math.cos(Date.now() * 0.002 + i) * 0.05;
+                positions[i + 2] += Math.sin(Date.now() * 0.002 + i) * 0.05;
+            }
+            loadingParticles.geometry.attributes.position.needsUpdate = true;
+            loadingParticles.rotation.y += 0.01;
+
+            loadingLines.forEach((line, index) => {
+                const pos = line.geometry.attributes.position.array;
+                pos[0] = positions[index * 6 % (loadingParticleCount * 3)];
+                pos[1] = positions[index * 6 + 1 % (loadingParticleCount * 3)];
+                pos[2] = positions[index * 6 + 2 % (loadingParticleCount * 3)];
+                pos[3] = positions[(index + 1) * 6 % (loadingParticleCount * 3)];
+                pos[4] = positions[(index + 1) * 6 + 1 % (loadingParticleCount * 3)];
+                pos[5] = positions[(index + 1) * 6 + 2 % (loadingParticleCount * 3)];
+                line.geometry.attributes.position.needsUpdate = true;
+            });
+
+            loadingPercentage += 0.5;
+            if (loadingPercentage <= 100) {
+                percentageText.textContent = `${Math.round(loadingPercentage)}%`;
+            } else {
+                loadingScreen.style.opacity = 0;
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    websiteContent.forEach(el => el.style.display = '');
+                }, 500);
+                return;
+            }
+
+            loadingRenderer.render(loadingScene, loadingCamera);
+        }
+
+        animateLoading();
+
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
-        
+        let bgParticles = [];
+
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-        
+
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
-        
+
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
@@ -1312,14 +1396,8 @@
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
-                
-                if (this.x < 0 || this.x > canvas.width) {
-                    this.speedX = -this.speedX;
-                }
-                
-                if (this.y < 0 || this.y > canvas.height) {
-                    this.speedY = -this.speedY;
-                }
+                if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+                if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
             }
             
             draw() {
@@ -1329,37 +1407,37 @@
                 ctx.fill();
             }
         }
-        
-        function initParticles() {
-            particles = [];
+
+        function initBgParticles() {
+            bgParticles = [];
             const particleCount = Math.min(150, Math.floor(canvas.width * canvas.height / 6000));
             for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
+                bgParticles.push(new Particle());
             }
         }
-        
-        function animate() {
+
+        function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (const particle of particles) {
+            for (const particle of bgParticles) {
                 particle.update();
                 particle.draw();
             }
-            requestAnimationFrame(animate);
+            requestAnimationFrame(animateParticles);
         }
-        
-        initParticles();
-        animate();
-        
+
+        initBgParticles();
+        animateParticles();
+
         const cursor = document.querySelector('.cursor');
         const cursorDot = document.querySelector('.cursor-dot');
-        
+
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
             cursorDot.style.left = e.clientX + 'px';
             cursorDot.style.top = e.clientY + 'px';
         });
-        
+
         const threeContainer = document.getElementById('three-container');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -1367,100 +1445,41 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         threeContainer.appendChild(renderer.domElement);
 
-        const snowflakes = [];
-        class Snowflake {
-            constructor() {
-                this.x = (Math.random() - 0.5) * 200;
-                this.y = Math.random() * 100 + 50;
-                this.z = (Math.random() - 0.5) * 200;
-                this.size = Math.random() * 0.8 + 0.4;
-                this.speed = Math.random() * 0.3 + 0.1;
-            }
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        const threeParticleCount = 50;
+        for (let i = 0; i < threeParticleCount; i++) {
+            const x = (Math.random() - 0.5) * 1000;
+            const y = (Math.random() - 0.5) * 1000;
+            const z = (Math.random() - 0.5) * 1000;
+            vertices.push(x, y, z);
+        }
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        const material = new THREE.PointsMaterial({ size: 1, color: 0xffffff, transparent: true, opacity: 0.3 });
+        const threeParticles = new THREE.Points(geometry, material);
+        scene.add(threeParticles);
 
-            update() {
-                this.y -= this.speed;
-                if (this.y < -50) {
-                    this.y = 100;
-                    this.x = (Math.random() - 0.5) * 200;
-                    this.z = (Math.random() - 0.5) * 200;
-                }
-            }
+        const threeLines = [];
+        for (let i = 0; i < 20; i++) {
+            const idx1 = Math.floor(Math.random() * threeParticleCount) * 3;
+            const idx2 = Math.floor(Math.random() * threeParticleCount) * 3;
+            const lineGeometry = new THREE.BufferGeometry().setFromPoints([
+                new THREE.Vector3(vertices[idx1], vertices[idx1 + 1], vertices[idx1 + 2]),
+                new THREE.Vector3(vertices[idx2], vertices[idx2 + 1], vertices[idx2 + 2])
+            ]);
+            const lineMaterial = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.1 });
+            const line = new THREE.Line(lineGeometry, lineMaterial);
+            threeLines.push(line);
+            scene.add(line);
         }
 
-        for (let i = 0; i < 150; i++) {
-            snowflakes.push(new Snowflake());
+        function animateLines() {
+            threeLines.forEach(line => {
+                line.material.opacity = 0.1 + Math.sin(Date.now() * 0.001 + Math.random()) * 0.05;
+            });
         }
 
-        const snowGeometry = new THREE.BufferGeometry();
-        const snowVertices = new Float32Array(snowflakes.length * 3);
-        const snowMaterial = new THREE.PointsMaterial({
-            color: 0xffffff,
-            size: 0.8,
-            transparent: true,
-            opacity: 0.7
-        });
-        const snowSystem = new THREE.Points(snowGeometry, snowMaterial);
-        scene.add(snowSystem);
-
-        const nodes = [];
-        const nodeCount = 15;
-        const nodeGeometry = new THREE.SphereGeometry(0.6, 16, 16);
-        const glowMaterial = new THREE.MeshBasicMaterial({ 
-            color: 0xffffff, 
-            transparent: true, 
-            opacity: 0.7,
-            blending: THREE.AdditiveBlending 
-        });
-        const lineMaterial = new THREE.LineBasicMaterial({ 
-            color: 0xffffff, 
-            transparent: true, 
-            opacity: 0.3,
-            blending: THREE.AdditiveBlending 
-        });
-
-        for (let i = 0; i < nodeCount; i++) {
-            const node = new THREE.Mesh(nodeGeometry, glowMaterial);
-            node.position.set(
-                (Math.random() - 0.5) * 80,
-                (Math.random() - 0.5) * 80,
-                (Math.random() - 0.5) * 80
-            );
-            nodes.push({ mesh: node, velocity: new THREE.Vector3() });
-            scene.add(node);
-        }
-
-        const lines = [];
-        for (let i = 0; i < nodeCount; i++) {
-            for (let j = i + 1; j < nodeCount; j++) {
-                if (Math.random() > 0.85) {
-                    const geometry = new THREE.BufferGeometry().setFromPoints([
-                        nodes[i].mesh.position,
-                        nodes[j].mesh.position
-                    ]);
-                    const line = new THREE.Line(geometry, lineMaterial);
-                    lines.push({ line, node1: i, node2: j });
-                    scene.add(line);
-                }
-            }
-        }
-
-        const glowGroup = new THREE.Group();
-        for (let i = 0; i < nodeCount; i++) {
-            const glow = new THREE.Mesh(
-                new THREE.SphereGeometry(1.5, 16, 16),
-                new THREE.MeshBasicMaterial({
-                    color: 0xffffff,
-                    transparent: true,
-                    opacity: 0.2,
-                    blending: THREE.AdditiveBlending
-                })
-            );
-            glow.position.copy(nodes[i].mesh.position);
-            glowGroup.add(glow);
-        }
-        scene.add(glowGroup);
-
-        camera.position.z = 90;
+        camera.position.z = 500;
 
         const footerThreeContainer = document.getElementById('footer-three-container');
         const footerScene = new THREE.Scene();
@@ -1475,29 +1494,18 @@
         footerThreeContainer.style.height = '100%';
         footerThreeContainer.style.zIndex = '0';
 
-        const footerParticles = [];
-        const particleCount = 75;
-        const footerGeometry = new THREE.BufferGeometry();
-        const footerVertices = new Float32Array(particleCount * 3);
-        const footerMaterial = new THREE.PointsMaterial({
-            color: 0xffffff,
-            size: 1,
-            transparent: true,
-            opacity: 0.5,
-            blending: THREE.AdditiveBlending
-        });
-        for (let i = 0; i < particleCount; i++) {
+        const footerParticleGeometry = new THREE.BufferGeometry();
+        const footerVertices = [];
+        const footerParticleCount = 100;
+        for (let i = 0; i < footerParticleCount; i++) {
             const x = (Math.random() - 0.5) * 120;
             const y = (Math.random() - 0.5) * 25;
             const z = (Math.random() - 0.5) * 60;
-            footerParticles.push({ x, y, z, baseY: y });
-            const j = i * 3;
-            footerVertices[j] = x;
-            footerVertices[j + 1] = y;
-            footerVertices[j + 2] = z;
+            footerVertices.push(x, y, z);
         }
-        footerGeometry.setAttribute('position', new THREE.BufferAttribute(footerVertices, 3));
-        const footerParticleSystem = new THREE.Points(footerGeometry, footerMaterial);
+        footerParticleGeometry.setAttribute('position', new THREE.Float32BufferAttribute(footerVertices, 3));
+        const footerParticleMaterial = new THREE.PointsMaterial({ size: 0.8, color: 0xffffff, transparent: true, opacity: 0.4 });
+        const footerParticleSystem = new THREE.Points(footerParticleGeometry, footerParticleMaterial);
         footerScene.add(footerParticleSystem);
         footerCamera.position.z = 35;
 
@@ -1510,81 +1518,51 @@
         function animate3D() {
             requestAnimationFrame(animate3D);
 
-            for (let i = 0, j = 0; i < snowflakes.length; i++, j += 3) {
-                snowflakes[i].update();
-                snowVertices[j] = snowflakes[i].x;
-                snowVertices[j + 1] = snowflakes[i].y;
-                snowVertices[j + 2] = snowflakes[i].z;
+            const positions = threeParticles.geometry.attributes.position.array;
+            for (let i = 0; i < threeParticleCount * 3; i += 3) {
+                positions[i] += Math.sin(Date.now() * 0.001 + i) * 0.02;
+                positions[i + 1] += Math.cos(Date.now() * 0.001 + i) * 0.02;
+                positions[i + 2] += Math.sin(Date.now() * 0.001 + i) * 0.02;
             }
-            snowGeometry.setAttribute('position', new THREE.BufferAttribute(snowVertices, 3));
+            threeParticles.geometry.attributes.position.needsUpdate = true;
 
-            nodes.forEach((node, i) => {
-                const time = Date.now() * 0.001;
-                node.velocity.add(
-                    new THREE.Vector3(
-                        Math.sin(time + i) * 0.01,
-                        Math.cos(time + i * 0.5) * 0.01,
-                        Math.sin(time + i * 0.3) * 0.01
-                    )
-                );
-                node.velocity.multiplyScalar(0.95);
-                node.mesh.position.add(node.velocity);
-                
-                const scale = 0.9 + Math.sin(time + i) * 0.2;
-                node.mesh.scale.setScalar(scale);
-                glowGroup.children[i].scale.setScalar(scale * 2);
-                glowGroup.children[i].position.copy(node.mesh.position);
+            threeLines.forEach((line, index) => {
+                const pos = line.geometry.attributes.position.array;
+                const idx1 = index * 6 % (threeParticleCount * 3);
+                const idx2 = (index + 1) * 6 % (threeParticleCount * 3);
+                pos[0] = positions[idx1];
+                pos[1] = positions[idx1 + 1];
+                pos[2] = positions[idx1 + 2];
+                pos[3] = positions[idx2];
+                pos[4] = positions[idx2 + 1];
+                pos[5] = positions[idx2 + 2];
+                line.geometry.attributes.position.needsUpdate = true;
             });
 
-            lines.forEach(line => {
-                const pos = line.line.geometry.attributes.position;
-                pos.array[0] = nodes[line.node1].mesh.position.x;
-                pos.array[1] = nodes[line.node1].mesh.position.y;
-                pos.array[2] = nodes[line.node1].mesh.position.z;
-                pos.array[3] = nodes[line.node2].mesh.position.x;
-                pos.array[4] = nodes[line.node2].mesh.position.y;
-                pos.array[5] = nodes[line.node2].mesh.position.z;
-                pos.needsUpdate = true;
-                
-                const distance = nodes[line.node1].mesh.position.distanceTo(nodes[line.node2].mesh.position);
-                line.line.material.opacity = Math.max(0.2, 0.7 - distance * 0.015);
-            });
+            animateLines();
 
-            camera.position.x += (mouseX * 30 - camera.position.x) * 0.05;
-            camera.position.y += (mouseY * 30 - camera.position.y) * 0.05;
+            camera.position.x += (mouseX * 200 - camera.position.x) * 0.05;
+            camera.position.y += (mouseY * 200 - camera.position.y) * 0.05;
             camera.lookAt(scene.position);
 
-            const time = Date.now() * 0.001;
-            for (let i = 0; i < particleCount; i++) {
-                const particle = footerParticles[i];
-                const j = i * 3;
-                particle.y = particle.baseY + Math.sin(time + particle.x * 0.15) * 6;
-                footerVertices[j] = particle.x;
-                footerVertices[j + 1] = particle.y;
-                footerVertices[j + 2] = particle.z;
+            const footerPositions = footerParticleSystem.geometry.attributes.position.array;
+            for (let i = 0; i < footerParticleCount * 3; i += 3) {
+                footerPositions[i + 1] = Math.sin(Date.now() * 0.001 + footerPositions[i]) * 5;
             }
-            footerGeometry.setAttribute('position', new THREE.BufferAttribute(footerVertices, 3));
-            footerCamera.position.x += (mouseX * 12 - footerCamera.position.x) * 0.05;
+            footerParticleSystem.geometry.attributes.position.needsUpdate = true;
+            footerCamera.position.x += (mouseX * 10 - footerCamera.position.x) * 0.05;
             footerCamera.lookAt(footerScene.position);
 
             renderer.render(scene, camera);
             footerRenderer.render(footerScene, footerCamera);
         }
 
-        snowGeometry.setAttribute('position', new THREE.BufferAttribute(snowVertices, 3));
-        for (let i = 0, j = 0; i < snowflakes.length; i++, j += 3) {
-            snowVertices[j] = snowflakes[i].x;
-            snowVertices[j + 1] = snowflakes[i].y;
-            snowVertices[j + 2] = snowflakes[i].z;
-        }
-        
         animate3D();
 
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            
             footerCamera.aspect = window.innerWidth / 300;
             footerCamera.updateProjectionMatrix();
             footerRenderer.setSize(window.innerWidth, 300);
@@ -1594,7 +1572,7 @@
         const pages = document.querySelectorAll('.page');
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const mobileNav = document.querySelector('.mobile-nav');
-        
+
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1612,7 +1590,7 @@
         mobileMenuBtn.addEventListener('click', () => {
             mobileNav.classList.toggle('active');
         });
-        
+
         const hostBtn = document.getElementById('host-btn');
         const gigBtn = document.getElementById('gig-btn');
         const hostModal = document.getElementById('host-modal');
@@ -1624,7 +1602,7 @@
         const privacyModal = document.getElementById('privacy-modal');
         const termsModal = document.getElementById('terms-modal');
         const closeButtons = document.querySelectorAll('.modal-close');
-        
+
         function openModal(modal) {
             modal.style.display = 'flex';
             document.body.classList.add('modal-open');
@@ -1649,46 +1627,73 @@
             e.preventDefault();
             openModal(termsModal);
         });
-        
-        closeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                closeModal(hostModal);
-                closeModal(gigModal);
-                closeModal(aboutModal);
-                closeModal(privacyModal);
-                closeModal(termsModal);
-            });
-        });
-        
-        window.addEventListener('click', (e) => {
-            if (e.target === hostModal) closeModal(hostModal);
-            if (e.target === gigModal) closeModal(gigModal);
-            if (e.target === aboutModal) closeModal(aboutModal);
-            if (e.target === privacyModal) closeModal(privacyModal);
-            if (e.target === termsModal) closeModal(termsModal);
-        });
-        
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                question.classList.toggle('active');
-                const answer = question.nextElementSibling;
-                answer.classList.toggle('active');
+
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modal = btn.closest('.modal');
+                closeModal(modal);
             });
         });
 
         document.addEventListener('click', (e) => {
-            const ripple = document.createElement('span');
-            ripple.classList.add('ripple');
-            const diameter = 120;
-            ripple.style.width = ripple.style.height = `${diameter}px`;
-            ripple.style.left = `${e.clientX - diameter/2}px`;
-            ripple.style.top = `${e.clientY - diameter/2}px`;
-            document.body.appendChild(ripple);
-            setTimeout(() => {
-                ripple.remove();
-            }, 1000);
+            if (e.target.classList.contains('modal')) {
+                closeModal(e.target);
+            }
         });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => closeModal(modal));
+            }
+        });
+
+        function handleIntersection(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }
+
+        const observer = new IntersectionObserver(handleIntersection, {
+            threshold: 0.1,
+            rootMargin: '50px'
+        });
+
+        document.querySelectorAll('.card, .step').forEach(el => observer.observe(el));
+
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = answer.classList.contains('active');
+                
+                faqQuestions.forEach(q => {
+                    q.classList.remove('active');
+                    q.nextElementSibling.classList.remove('active');
+                });
+
+                if (!isActive) {
+                    question.classList.add('active');
+                    answer.classList.add('active');
+                }
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            const ripple = document.createElement('div');
+            ripple.classList.add('ripple');
+            ripple.style.left = e.clientX + 'px';
+            ripple.style.top = e.clientY + 'px';
+            document.body.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 1000);
+        });
+
+        const customLogo = document.getElementById('custom-logo');
+        customLogo.onerror = () => {
+            customLogo.src = 'https://via.placeholder.com/150x60?text=KrewsUp';
+        };
     </script>
 </body>
 </html>
