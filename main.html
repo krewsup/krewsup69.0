@@ -13,6 +13,7 @@
             box-sizing: border-box;
             font-family: 'Space Grotesk', sans-serif;
             color: #fff;
+            cursor: none;
         }
         body {
             background-color: #000;
@@ -103,7 +104,6 @@
             display: none;
             background: transparent;
             border: none;
-            cursor: pointer;
             font-size: 24px;
             padding: 0 15px;
         }
@@ -150,7 +150,7 @@
             margin-right: auto;
         }
         h1 {
-            font-size: 100px;
+            font-size: 60px;
             font-weight: 700;
             line-height: 1;
             text-transform: uppercase;
@@ -164,7 +164,7 @@
         }
         .tagline {
             font-size: 28px;
-            margin: 20px 0 40px;
+            margin: 10px 0 20px;
             opacity: 0.9;
             transition: opacity 0.3s ease;
         }
@@ -172,15 +172,20 @@
             opacity: 1;
         }
         .description {
-            font-size: 18px;
+            font-size: 22px;
             line-height: 1.8;
             opacity: 0.8;
             max-width: 600px;
+            margin-bottom: 20px;
         }
         .buttons {
             display: flex;
-            gap: 25px;
-            margin-top: 40px;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .btn-row {
+            display: flex;
+            gap: 15px;
         }
         .btn {
             padding: 15px 35px;
@@ -189,12 +194,11 @@
             border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
-            cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             position: relative;
             overflow: hidden;
-            z-index: 1;
+            z-index: 5;
             color: #000;
         }
         #host-btn:hover {
@@ -445,6 +449,9 @@
             .footer-company h3 {
                 font-size: 24px;
             }
+            .btn-row {
+                flex-direction: column;
+            }
         }
         .steps {
             margin: 60px 0;
@@ -584,7 +591,6 @@
         }
         .faq-question {
             padding: 20px;
-            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -617,38 +623,26 @@
             opacity: 0.8;
         }
         .cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #fff;
-            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 20px;
             position: fixed;
             pointer-events: none;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) rotate(-90deg);
             z-index: 9999;
-            transition: all 0.1s ease;
-            transition-property: width, height, border;
+            transition: all 0.05s ease;
+            filter: brightness(0) invert(1);
         }
-        .cursor-dot {
-            width: 6px;
-            height: 6px;
-            background: #fff;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-            transition: all 0.15s ease;
+        .cursor.bend {
+            transform: translate(-50%, -50%) rotate(-90deg) scaleY(0.8);
         }
         a:hover ~ .cursor {
-            width: 50px;
-            height: 50px;
-            border-width: 1px;
-            opacity: 0.5;
+            font-size: 24px;
+            transform: translate(-50%, -50%) rotate(-90deg) scale(1.2);
         }
         .app-buttons {
             display: flex;
-            gap: 25px;
-            margin-top: 40px;
+            gap: 15px;
         }
         .app-btn {
             display: flex;
@@ -658,10 +652,10 @@
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 8px;
-            cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            z-index: 5;
         }
         .app-btn:hover {
             transform: translateY(-5px);
@@ -725,6 +719,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             animation: modalFadeIn 0.4s ease forwards;
+            z-index: 101;
         }
         @keyframes modalFadeIn {
             from { opacity: 0; transform: translateY(-30px); }
@@ -735,8 +730,8 @@
             top: 20px;
             right: 20px;
             font-size: 28px;
-            cursor: pointer;
             transition: transform 0.3s ease;
+            z-index: 102;
         }
         .modal-close:hover {
             transform: rotate(90deg);
@@ -768,11 +763,10 @@
             line-height: 1.5;
         }
         @media (max-width: 768px) {
-            .cursor, .cursor-dot { display: none; }
-            .app-buttons { flex-direction: column; gap: 15px; }
+            .cursor { display: none; }
             .modal-content { padding: 30px; }
             .modal-title { font-size: 28px; }
-            .buttons { flex-direction: column; }
+            .app-buttons { flex-direction: column; gap: 10px; }
         }
         .ripple {
             position: fixed;
@@ -782,7 +776,7 @@
             transform: scale(0);
             animation: ripple 1s ease-out;
             pointer-events: none;
-            z-index: 999;
+            z-index: 998;
         }
         @keyframes ripple {
             0% { transform: scale(0) rotate(0deg); opacity: 1; border-width: 2px; }
@@ -835,18 +829,16 @@
             z-index: 1000;
         }
         #loading-canvas {
-            position: absolute;
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 100%;
-            max-height: 50vh; /* Limit height on mobile */
+            width: 100%;
+            height: 100%;
+            max-width: 100vw;
+            max-height: 100vh;
         }
         #loading-text {
             font-size: 24px;
             font-weight: 700;
             position: absolute;
-            top: 65%;
+            top: 70%;
             left: 50%;
             transform: translateX(-50%);
             color: #fff;
@@ -864,7 +856,7 @@
             font-size: 48px;
             font-weight: 700;
             position: absolute;
-            top: 75%;
+            top: 80%;
             left: 50%;
             transform: translateX(-50%);
             color: #fff;
@@ -872,30 +864,24 @@
             text-shadow: 0 0 10px #000;
         }
         @media (max-width: 768px) {
-            #loading-canvas {
-                width: 80vw; /* Adjust width to viewport */
-                height: 80vw; /* Keep square aspect ratio */
-                max-width: 300px;
-                max-height: 300px;
-            }
             #loading-text {
-                font-size: 18px; /* Smaller font for mobile */
-                top: 70%; /* Adjust position */
-                white-space: normal; /* Allow wrapping */
+                font-size: 18px;
+                top: 75%;
+                white-space: normal;
             }
             #percentage {
-                font-size: 36px; /* Smaller font for mobile */
-                top: 85%; /* Adjust position */
+                font-size: 36px;
+                top: 85%;
             }
         }
         @media (max-width: 480px) {
             #loading-text {
                 font-size: 16px;
-                top: 68%;
+                top: 70%;
             }
             #percentage {
                 font-size: 30px;
-                top: 82%;
+                top: 80%;
             }
         }
     </style>
@@ -903,13 +889,12 @@
 <body>
     <div id="loading-screen">
         <canvas id="loading-canvas"></canvas>
-        <div id="loading-text">KrewsUp <br> Brew Your Connections. </div>
+        <div id="loading-text">KrewsUp - Brew Your Connections.</div>
         <div id="percentage">0%</div>
     </div>
     <canvas id="bg-canvas"></canvas>
     <div id="three-container"></div>
-    <div class="cursor"></div>
-    <div class="cursor-dot"></div>
+    <div class="cursor">👉</div>
     <div class="container">
         <header>
             <nav>
@@ -940,36 +925,38 @@
                     <p class="tagline">Bharat's Ultimate Gig Platform</p>
                     <p class="description">KrewsUp is revolutionizing the gig economy by creating a seamless bridge between talent and opportunity. We connect event hosts with skilled aspirants, ensuring fast payments, verified profiles, and limitless growth potential.</p>
                     <div class="buttons">
-                        <button class="btn" id="host-btn">Host an Event</button>
-                        <button class="btn" id="gig-btn">Join as a Gig</button>
-                    </div>
-                    <div class="app-buttons">
-                        <div class="app-btn">
-                            <div class="app-btn-icon">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.09 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z" fill="white"/>
-                                </svg>
-                            </div>
-                            <div class="app-btn-content">
-                                <span class="app-btn-label">Download on the</span>
-                                <span class="app-btn-name">App Store</span>
-                            </div>
-                            <div class="app-btn-tooltip">Stay tight! We're still under development</div>
+                        <div class="btn-row">
+                            <button class="btn" id="host-btn">Host an Event</button>
+                            <button class="btn" id="gig-btn">Join as a Gig</button>
                         </div>
-                        <div class="app-btn">
-                            <div class="app-btn-icon">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3.60938 3.15234C3.29688 3.48047 3.125 3.99609 3.125 4.67969V19.3203C3.125 20.0039 3.29688 20.5195 3.60938 20.8477L3.70312 20.9414L13.1016 11.543V11.4414L3.70312 2.05859L3.60938 3.15234Z" fill="white"/>
-                                    <path d="M17.168 15.6094L13.1016 11.543V11.4414L17.168 7.37499L17.2852 7.44921L22.0117 10.0547C23.4023 10.8555 23.4023 12.1289 22.0117 12.9297L17.2852 15.5352L17.168 15.6094Z" fill="white"/>
-                                    <path d="M17.2852 15.5352L13.1016 11.5L3.60938 20.8477C4.0625 21.3281 4.78125 21.3867 5.5625 20.9297L17.2852 15.5352Z" fill="white"/>
-                                    <path d="M17.2852 7.44921L5.5625 2.05468C4.78125 1.59765 4.0625 1.65625 3.60938 2.14062L13.1016 11.5L17.2852 7.44921Z" fill="white"/>
-                                </svg>
+                        <div class="app-buttons">
+                            <div class="app-btn">
+                                <div class="app-btn-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.09 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z" fill="white"/>
+                                    </svg>
+                                </div>
+                                <div class="app-btn-content">
+                                    <span class="app-btn-label">Download on the</span>
+                                    <span class="app-btn-name">App Store</span>
+                                </div>
+                                <div class="app-btn-tooltip">Stay tight! We're still under development</div>
                             </div>
-                            <div class="app-btn-content">
-                                <span class="app-btn-label">GET IT ON</span>
-                                <span class="app-btn-name">Google Play</span>
+                            <div class="app-btn">
+                                <div class="app-btn-icon">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.60938 3.15234C3.29688 3.48047 3.125 3.99609 3.125 4.67969V19.3203C3.125 20.0039 3.29688 20.5195 3.60938 20.8477L3.70312 20.9414L13.1016 11.543V11.4414L3.70312 2.05859L3.60938 3.15234Z" fill="white"/>
+                                        <path d="M17.168 15.6094L13.1016 11.543V11.4414L17.168 7.37499L17.2852 7.44921L22.0117 10.0547C23.4023 10.8555 23.4023 12.1289 22.0117 12.9297L17.2852 15.5352L17.168 15.6094Z" fill="white"/>
+                                        <path d="M17.2852 15.5352L13.1016 11.5L3.60938 20.8477C4.0625 21.3281 4.78125 21.3867 5.5625 20.9297L17.2852 15.5352Z" fill="white"/>
+                                        <path d="M17.2852 7.44921L5.5625 2.05468C4.78125 1.59765 4.0625 1.65625 3.60938 2.14062L13.1016 11.5L17.2852 7.44921Z" fill="white"/>
+                                    </svg>
+                                </div>
+                                <div class="app-btn-content">
+                                    <span class="app-btn-label">GET IT ON</span>
+                                    <span class="app-btn-name">Google Play</span>
+                                </div>
+                                <div class="app-btn-tooltip">Coming soon! We're working hard to launch</div>
                             </div>
-                            <div class="app-btn-tooltip">Coming soon! We're working hard to launch</div>
                         </div>
                     </div>
                 </div>
@@ -1295,8 +1282,8 @@
         <div id="footer-three-container"></div>
         <div class="footer-container">
             <div class="footer-company">
-                <h3>KrewsUp Tech Pvt Ltd </h3>
-                <p>Empowering India's gig economy with innovative solutions </p>
+                <h3>KrewsUp Tech Pvt Ltd</h3>
+                <p>Empowering India's gig economy with innovative solutions</p>
                 <div class="footer-social">
                     <a href="#" class="twitter"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
                     <a href="#" class="linkedin"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.067 0-1.14.92-2.066 2.063-2.066 1.14 0 2.066.926 2.066 2.066 0 1.141-.926 2.067-2.066 2.067zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
@@ -1331,21 +1318,19 @@
         websiteContent.forEach(el => el.style.display = 'none');
 
         function resizeLoadingCanvas() {
-            const width = Math.min(window.innerWidth * 0.8, 400); // 80% of viewport width, max 400px
-            const height = width; // Keep square aspect ratio
-            loadingCanvas.width = width;
-            loadingCanvas.height = height;
-            loadingRenderer.setSize(width, height);
-            loadingCamera.aspect = 1; // Square aspect ratio
+            loadingCanvas.width = window.innerWidth;
+            loadingCanvas.height = window.innerHeight;
+            loadingRenderer.setSize(window.innerWidth, window.innerHeight);
+            loadingCamera.aspect = window.innerWidth / window.innerHeight;
             loadingCamera.updateProjectionMatrix();
         }
 
         const loadingScene = new THREE.Scene();
-        const loadingCamera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+        const loadingCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const loadingRenderer = new THREE.WebGLRenderer({ canvas: loadingCanvas, alpha: true });
-        resizeLoadingCanvas(); // Set initial size
+        resizeLoadingCanvas();
         
-        window.addEventListener('resize', resizeLoadingCanvas); // Adjust on resize
+        window.addEventListener('resize', resizeLoadingCanvas);
 
         const loadingGeometry = new THREE.BufferGeometry();
         const loadingVertices = [];
@@ -1399,7 +1384,7 @@
                 line.geometry.attributes.position.needsUpdate = true;
             });
 
-            loadingPercentage += 0.5;
+            loadingPercentage += 1;
             if (loadingPercentage <= 100) {
                 percentageText.textContent = `${Math.round(loadingPercentage)}%`;
             } else {
@@ -1474,13 +1459,19 @@
         animateParticles();
 
         const cursor = document.querySelector('.cursor');
-        const cursorDot = document.querySelector('.cursor-dot');
 
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
-            cursorDot.style.left = e.clientX + 'px';
-            cursorDot.style.top = e.clientY + 'px';
+            cursor.classList.remove('bend');
+        });
+
+        document.addEventListener('mousedown', (e) => {
+            cursor.classList.add('bend');
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.classList.remove('bend');
         });
 
         const threeContainer = document.getElementById('three-container');
@@ -1658,16 +1649,26 @@
             document.body.classList.remove('modal-open');
         }
 
-        hostBtn.addEventListener('click', () => openModal(hostModal));
-        gigBtn.addEventListener('click', () => openModal(gigModal));
+        hostBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(hostModal);
+        });
+
+        gigBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(gigModal);
+        });
+
         aboutLink.addEventListener('click', (e) => {
             e.preventDefault();
             openModal(aboutModal);
         });
+
         privacyLink.addEventListener('click', (e) => {
             e.preventDefault();
             openModal(privacyModal);
         });
+
         termsLink.addEventListener('click', (e) => {
             e.preventDefault();
             openModal(termsModal);
@@ -1683,6 +1684,13 @@
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('modal')) {
                 closeModal(e.target);
+            } else if (!e.target.closest('.btn, .modal-content, .nav-link, .mobile-menu-btn')) {
+                const ripple = document.createElement('div');
+                ripple.classList.add('ripple');
+                ripple.style.left = e.clientX + 'px';
+                ripple.style.top = e.clientY + 'px';
+                document.body.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 1000);
             }
         });
 
@@ -1724,15 +1732,6 @@
                     answer.classList.add('active');
                 }
             });
-        });
-
-        document.addEventListener('click', (e) => {
-            const ripple = document.createElement('div');
-            ripple.classList.add('ripple');
-            ripple.style.left = e.clientX + 'px';
-            ripple.style.top = e.clientY + 'px';
-            document.body.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 1000);
         });
 
         const customLogo = document.getElementById('custom-logo');
