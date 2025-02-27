@@ -776,6 +776,43 @@
                 flex-direction: column;
             }
         }
+        .ripple {
+            position: fixed;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            transform: scale(0);
+            animation: ripple 1s ease-out;
+            pointer-events: none;
+            z-index: 999;
+        }
+        @keyframes ripple {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+                border-width: 2px;
+            }
+            25% {
+                transform: scale(1.5) rotate(10deg);
+                opacity: 0.8;
+                border-width: 3px;
+            }
+            50% {
+                transform: scale(3) rotate(-15deg);
+                opacity: 0.6;
+                border-width: 2px;
+            }
+            75% {
+                transform: scale(4.5) rotate(10deg);
+                opacity: 0.3;
+                border-width: 1px;
+            }
+            100% {
+                transform: scale(6) rotate(0deg);
+                opacity: 0;
+                border-width: 0px;
+            }
+        }
         .growth-pattern {
             position: absolute;
             right: 50px;
@@ -794,10 +831,6 @@
             opacity: 0.9;
             animation: float 4s ease-in-out infinite;
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-            transition: transform 0.3s ease;
-        }
-        .growth-icon:hover {
-            transform: rotate(360deg);
         }
         .growth-icon.rupee {
             top: 0;
@@ -1642,6 +1675,19 @@
                 const answer = question.nextElementSibling;
                 answer.classList.toggle('active');
             });
+        });
+
+        document.addEventListener('click', (e) => {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            const diameter = 120;
+            ripple.style.width = ripple.style.height = `${diameter}px`;
+            ripple.style.left = `${e.clientX - diameter/2}px`;
+            ripple.style.top = `${e.clientY - diameter/2}px`;
+            document.body.appendChild(ripple);
+            setTimeout(() => {
+                ripple.remove();
+            }, 1000);
         });
     </script>
 </body>
