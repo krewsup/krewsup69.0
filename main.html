@@ -13,12 +13,12 @@
             box-sizing: border-box;
             font-family: 'Space Grotesk', sans-serif;
             color: #fff;
-            cursor: none;
         }
         body {
             background-color: #000;
             overflow-x: hidden;
             min-height: 100vh;
+            cursor: none; /* Removes the default arrow pointer */
         }
         body.modal-open {
             overflow: hidden;
@@ -104,6 +104,7 @@
             display: none;
             background: transparent;
             border: none;
+            cursor: pointer;
             font-size: 24px;
             padding: 0 15px;
         }
@@ -150,7 +151,7 @@
             margin-right: auto;
         }
         h1 {
-            font-size: 60px;
+            font-size: 100px;
             font-weight: 700;
             line-height: 1;
             text-transform: uppercase;
@@ -164,7 +165,7 @@
         }
         .tagline {
             font-size: 28px;
-            margin: 10px 0 20px;
+            margin: 20px 0 40px;
             opacity: 0.9;
             transition: opacity 0.3s ease;
         }
@@ -172,20 +173,15 @@
             opacity: 1;
         }
         .description {
-            font-size: 22px;
+            font-size: 18px;
             line-height: 1.8;
             opacity: 0.8;
             max-width: 600px;
-            margin-bottom: 20px;
         }
         .buttons {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .btn-row {
-            display: flex;
-            gap: 15px;
+            gap: 25px;
+            margin-top: 40px;
         }
         .btn {
             padding: 15px 35px;
@@ -194,11 +190,12 @@
             border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             position: relative;
             overflow: hidden;
-            z-index: 5;
+            z-index: 1;
             color: #000;
         }
         #host-btn:hover {
@@ -449,9 +446,6 @@
             .footer-company h3 {
                 font-size: 24px;
             }
-            .btn-row {
-                flex-direction: column;
-            }
         }
         .steps {
             margin: 60px 0;
@@ -591,6 +585,7 @@
         }
         .faq-question {
             padding: 20px;
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -623,26 +618,38 @@
             opacity: 0.8;
         }
         .cursor {
-            width: 24px;
-            height: 24px;
-            font-size: 20px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #fff;
+            border-radius: 50%;
             position: fixed;
             pointer-events: none;
-            transform: translate(-50%, -50%) rotate(-90deg);
+            transform: translate(-50%, -50%);
             z-index: 9999;
-            transition: all 0.05s ease;
-            filter: brightness(0) invert(1);
+            transition: all 0.1s ease;
+            transition-property: width, height, border;
         }
-        .cursor.bend {
-            transform: translate(-50%, -50%) rotate(-90deg) scaleY(0.8);
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: all 0.15s ease;
         }
         a:hover ~ .cursor {
-            font-size: 24px;
-            transform: translate(-50%, -50%) rotate(-90deg) scale(1.2);
+            width: 50px;
+            height: 50px;
+            border-width: 1px;
+            opacity: 0.5;
         }
         .app-buttons {
             display: flex;
-            gap: 15px;
+            gap: 25px;
+            margin-top: 40px;
         }
         .app-btn {
             display: flex;
@@ -652,10 +659,10 @@
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 8px;
+            cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            z-index: 5;
         }
         .app-btn:hover {
             transform: translateY(-5px);
@@ -719,7 +726,6 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             animation: modalFadeIn 0.4s ease forwards;
-            z-index: 101;
         }
         @keyframes modalFadeIn {
             from { opacity: 0; transform: translateY(-30px); }
@@ -730,8 +736,8 @@
             top: 20px;
             right: 20px;
             font-size: 28px;
+            cursor: pointer;
             transition: transform 0.3s ease;
-            z-index: 102;
         }
         .modal-close:hover {
             transform: rotate(90deg);
@@ -763,10 +769,11 @@
             line-height: 1.5;
         }
         @media (max-width: 768px) {
-            .cursor { display: none; }
+            .cursor, .cursor-dot { display: none; }
+            .app-buttons { flex-direction: column; gap: 15px; }
             .modal-content { padding: 30px; }
             .modal-title { font-size: 28px; }
-            .app-buttons { flex-direction: column; gap: 10px; }
+            .buttons { flex-direction: column; }
         }
         .ripple {
             position: fixed;
@@ -776,7 +783,7 @@
             transform: scale(0);
             animation: ripple 1s ease-out;
             pointer-events: none;
-            z-index: 998;
+            z-index: 999;
         }
         @keyframes ripple {
             0% { transform: scale(0) rotate(0deg); opacity: 1; border-width: 2px; }
@@ -889,12 +896,13 @@
 <body>
     <div id="loading-screen">
         <canvas id="loading-canvas"></canvas>
-        <div id="loading-text">KrewsUp - Brew Your Connections.</div>
+        <div id="loading-text">KrewsUp - Brew Your Connections. </div>
         <div id="percentage">0%</div>
     </div>
     <canvas id="bg-canvas"></canvas>
     <div id="three-container"></div>
-    <div class="cursor">👉</div>
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
     <div class="container">
         <header>
             <nav>
@@ -925,38 +933,36 @@
                     <p class="tagline">Bharat's Ultimate Gig Platform</p>
                     <p class="description">KrewsUp is revolutionizing the gig economy by creating a seamless bridge between talent and opportunity. We connect event hosts with skilled aspirants, ensuring fast payments, verified profiles, and limitless growth potential.</p>
                     <div class="buttons">
-                        <div class="btn-row">
-                            <button class="btn" id="host-btn">Host an Event</button>
-                            <button class="btn" id="gig-btn">Join as a Gig</button>
+                        <button class="btn" id="host-btn">Host an Event</button>
+                        <button class="btn" id="gig-btn">Join as a Gig</button>
+                    </div>
+                    <div class="app-buttons">
+                        <div class="app-btn">
+                            <div class="app-btn-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.09 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z" fill="white"/>
+                                </svg>
+                            </div>
+                            <div class="app-btn-content">
+                                <span class="app-btn-label">Download on the</span>
+                                <span class="app-btn-name">App Store</span>
+                            </div>
+                            <div class="app-btn-tooltip">Stay tight! We're still under development</div>
                         </div>
-                        <div class="app-buttons">
-                            <div class="app-btn">
-                                <div class="app-btn-icon">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.09 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z" fill="white"/>
-                                    </svg>
-                                </div>
-                                <div class="app-btn-content">
-                                    <span class="app-btn-label">Download on the</span>
-                                    <span class="app-btn-name">App Store</span>
-                                </div>
-                                <div class="app-btn-tooltip">Stay tight! We're still under development</div>
+                        <div class="app-btn">
+                            <div class="app-btn-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.60938 3.15234C3.29688 3.48047 3.125 3.99609 3.125 4.67969V19.3203C3.125 20.0039 3.29688 20.5195 3.60938 20.8477L3.70312 20.9414L13.1016 11.543V11.4414L3.70312 2.05859L3.60938 3.15234Z" fill="white"/>
+                                    <path d="M17.168 15.6094L13.1016 11.543V11.4414L17.168 7.37499L17.2852 7.44921L22.0117 10.0547C23.4023 10.8555 23.4023 12.1289 22.0117 12.9297L17.2852 15.5352L17.168 15.6094Z" fill="white"/>
+                                    <path d="M17.2852 15.5352L13.1016 11.5L3.60938 20.8477C4.0625 21.3281 4.78125 21.3867 5.5625 20.9297L17.2852 15.5352Z" fill="white"/>
+                                    <path d="M17.2852 7.44921L5.5625 2.05468C4.78125 1.59765 4.0625 1.65625 3.60938 2.14062L13.1016 11.5L17.2852 7.44921Z" fill="white"/>
+                                </svg>
                             </div>
-                            <div class="app-btn">
-                                <div class="app-btn-icon">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M3.60938 3.15234C3.29688 3.48047 3.125 3.99609 3.125 4.67969V19.3203C3.125 20.0039 3.29688 20.5195 3.60938 20.8477L3.70312 20.9414L13.1016 11.543V11.4414L3.70312 2.05859L3.60938 3.15234Z" fill="white"/>
-                                        <path d="M17.168 15.6094L13.1016 11.543V11.4414L17.168 7.37499L17.2852 7.44921L22.0117 10.0547C23.4023 10.8555 23.4023 12.1289 22.0117 12.9297L17.2852 15.5352L17.168 15.6094Z" fill="white"/>
-                                        <path d="M17.2852 15.5352L13.1016 11.5L3.60938 20.8477C4.0625 21.3281 4.78125 21.3867 5.5625 20.9297L17.2852 15.5352Z" fill="white"/>
-                                        <path d="M17.2852 7.44921L5.5625 2.05468C4.78125 1.59765 4.0625 1.65625 3.60938 2.14062L13.1016 11.5L17.2852 7.44921Z" fill="white"/>
-                                    </svg>
-                                </div>
-                                <div class="app-btn-content">
-                                    <span class="app-btn-label">GET IT ON</span>
-                                    <span class="app-btn-name">Google Play</span>
-                                </div>
-                                <div class="app-btn-tooltip">Coming soon! We're working hard to launch</div>
+                            <div class="app-btn-content">
+                                <span class="app-btn-label">GET IT ON</span>
+                                <span class="app-btn-name">Google Play</span>
                             </div>
+                            <div class="app-btn-tooltip">Coming soon! We're working hard to launch</div>
                         </div>
                     </div>
                 </div>
@@ -975,6 +981,36 @@
                         <div>
                             <div class="author-name">Arjun Mehta</div>
                             <div class="author-role">Event Director, BlinkEvents Pune</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">I love the flexibility KrewsUp offers. I can pick gigs that match my skills and schedule, and the quick payouts make it so much easier to manage my finances as a freelancer.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S</div>
+                        <div>
+                            <div class="author-name">Sneha Kapoor</div>
+                            <div class="author-role">Freelance Photographer, Delhi</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">The verification process gave me confidence to hire through KrewsUp. Every technician we’ve worked with has been skilled and dependable, making our productions smoother than ever.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">V</div>
+                        <div>
+                            <div class="author-name">Vikram Singh</div>
+                            <div class="author-role">Producer, Mumbai Film Co.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">KrewsUp’s platform is a lifesaver for small businesses like mine. I can quickly find staff for busy days, and the insurance coverage adds an extra layer of security.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">N</div>
+                        <div>
+                            <div class="author-name">Neha Gupta</div>
+                            <div class="author-role">Café Owner, Bangalore</div>
                         </div>
                     </div>
                 </div>
@@ -1282,8 +1318,8 @@
         <div id="footer-three-container"></div>
         <div class="footer-container">
             <div class="footer-company">
-                <h3>KrewsUp Tech Pvt Ltd</h3>
-                <p>Empowering India's gig economy with innovative solutions</p>
+                <h3>KrewsUp Tech Pvt Ltd </h3>
+                <p>Empowering India's gig economy with innovative solutions </p>
                 <div class="footer-social">
                     <a href="#" class="twitter"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
                     <a href="#" class="linkedin"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.067 0-1.14.92-2.066 2.063-2.066 1.14 0 2.066.926 2.066 2.066 0 1.141-.926 2.067-2.066 2.067zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
@@ -1459,19 +1495,13 @@
         animateParticles();
 
         const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
 
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
-            cursor.classList.remove('bend');
-        });
-
-        document.addEventListener('mousedown', (e) => {
-            cursor.classList.add('bend');
-        });
-
-        document.addEventListener('mouseup', () => {
-            cursor.classList.remove('bend');
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
         });
 
         const threeContainer = document.getElementById('three-container');
@@ -1583,161 +1613,153 @@
 
             const footerPositions = footerParticleSystem.geometry.attributes.position.array;
             for (let i = 0; i < footerParticleCount * 3; i += 3) {
-                footerPositions[i + 1] = Math.sin(Date.now() * 0.001 + footerPositions[i]) * 5;
-            }
-            footerParticleSystem.geometry.attributes.position.needsUpdate = true;
-            footerCamera.position.x += (mouseX * 10 - footerCamera.position.x) * 0.05;
-            footerCamera.lookAt(footerScene.position);
-
-            renderer.render(scene, camera);
-            footerRenderer.render(footerScene, footerCamera);
+                footerPositions[i + 1] =  Math.sin(Date.now() * 0.001 + footerPositions[i]) * 5;
         }
+        footerParticleSystem.geometry.attributes.position.needsUpdate = true;
+        footerCamera.position.x += (mouseX * 10 - footerCamera.position.x) * 0.05;
+        footerCamera.lookAt(footerScene.position);
 
-        animate3D();
+        renderer.render(scene, camera);
+        footerRenderer.render(footerScene, footerCamera);
+    }
 
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            footerCamera.aspect = window.innerWidth / 300;
-            footerCamera.updateProjectionMatrix();
-            footerRenderer.setSize(window.innerWidth, 300);
+    animate3D();
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        footerCamera.aspect = window.innerWidth / 300;
+        footerCamera.updateProjectionMatrix();
+        footerRenderer.setSize(window.innerWidth, 300);
+    });
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const pages = document.querySelectorAll('.page');
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileNav = document.querySelector('.mobile-nav');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            pages.forEach(page => page.style.display = 'none');
+            const targetPage = document.querySelector(targetId);
+            targetPage.style.display = 'block';
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            mobileNav.classList.remove('active');
+            window.scrollTo(0, 0);
         });
+    });
 
-        const navLinks = document.querySelectorAll('.nav-link');
-        const pages = document.querySelectorAll('.page');
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const mobileNav = document.querySelector('.mobile-nav');
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileNav.classList.toggle('active');
+    });
 
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                pages.forEach(page => page.style.display = 'none');
-                const targetPage = document.querySelector(targetId);
-                targetPage.style.display = 'block';
-                navLinks.forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-                mobileNav.classList.remove('active');
-                window.scrollTo(0, 0);
-            });
+    const hostBtn = document.getElementById('host-btn');
+    const gigBtn = document.getElementById('gig-btn');
+    const hostModal = document.getElementById('host-modal');
+    const gigModal = document.getElementById('gig-modal');
+    const aboutLink = document.getElementById('about-link');
+    const privacyLink = document.getElementById('privacy-link');
+    const termsLink = document.getElementById('terms-link');
+    const aboutModal = document.getElementById('about-modal');
+    const privacyModal = document.getElementById('privacy-modal');
+    const termsModal = document.getElementById('terms-modal');
+    const closeButtons = document.querySelectorAll('.modal-close');
+
+    function openModal(modal) {
+        modal.style.display = 'flex';
+        document.body.classList.add('modal-open');
+    }
+
+    function closeModal(modal) {
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+    }
+
+    hostBtn.addEventListener('click', () => openModal(hostModal));
+    gigBtn.addEventListener('click', () => openModal(gigModal));
+    aboutLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(aboutModal);
+    });
+    privacyLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(privacyModal);
+    });
+    termsLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(termsModal);
+    });
+
+    closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modal = btn.closest('.modal');
+            closeModal(modal);
         });
+    });
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileNav.classList.toggle('active');
-        });
-
-        const hostBtn = document.getElementById('host-btn');
-        const gigBtn = document.getElementById('gig-btn');
-        const hostModal = document.getElementById('host-modal');
-        const gigModal = document.getElementById('gig-modal');
-        const aboutLink = document.getElementById('about-link');
-        const privacyLink = document.getElementById('privacy-link');
-        const termsLink = document.getElementById('terms-link');
-        const aboutModal = document.getElementById('about-modal');
-        const privacyModal = document.getElementById('privacy-modal');
-        const termsModal = document.getElementById('terms-modal');
-        const closeButtons = document.querySelectorAll('.modal-close');
-
-        function openModal(modal) {
-            modal.style.display = 'flex';
-            document.body.classList.add('modal-open');
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal')) {
+            closeModal(e.target);
         }
+    });
 
-        function closeModal(modal) {
-            modal.style.display = 'none';
-            document.body.classList.remove('modal-open');
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal').forEach(modal => closeModal(modal));
         }
+    });
 
-        hostBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal(hostModal);
-        });
-
-        gigBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal(gigModal);
-        });
-
-        aboutLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal(aboutModal);
-        });
-
-        privacyLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal(privacyModal);
-        });
-
-        termsLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal(termsModal);
-        });
-
-        closeButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const modal = btn.closest('.modal');
-                closeModal(modal);
-            });
-        });
-
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) {
-                closeModal(e.target);
-            } else if (!e.target.closest('.btn, .modal-content, .nav-link, .mobile-menu-btn')) {
-                const ripple = document.createElement('div');
-                ripple.classList.add('ripple');
-                ripple.style.left = e.clientX + 'px';
-                ripple.style.top = e.clientY + 'px';
-                document.body.appendChild(ripple);
-                setTimeout(() => ripple.remove(), 1000);
+    function handleIntersection(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
             }
         });
+    }
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.modal').forEach(modal => closeModal(modal));
+    const observer = new IntersectionObserver(handleIntersection, {
+        threshold: 0.1,
+        rootMargin: '50px'
+    });
+
+    document.querySelectorAll('.card, .step').forEach(el => observer.observe(el));
+
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            
+            faqQuestions.forEach(q => {
+                q.classList.remove('active');
+                q.nextElementSibling.classList.remove('active');
+            });
+
+            if (!isActive) {
+                question.classList.add('active');
+                answer.classList.add('active');
             }
         });
+    });
 
-        function handleIntersection(entries, observer) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }
+    document.addEventListener('click', (e) => {
+        const ripple = document.createElement('div');
+        ripple.classList.add('ripple');
+        ripple.style.left = e.clientX + 'px';
+        ripple.style.top = e.clientY + 'px';
+        document.body.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 1000);
+    });
 
-        const observer = new IntersectionObserver(handleIntersection, {
-            threshold: 0.1,
-            rootMargin: '50px'
-        });
-
-        document.querySelectorAll('.card, .step').forEach(el => observer.observe(el));
-
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const isActive = answer.classList.contains('active');
-                
-                faqQuestions.forEach(q => {
-                    q.classList.remove('active');
-                    q.nextElementSibling.classList.remove('active');
-                });
-
-                if (!isActive) {
-                    question.classList.add('active');
-                    answer.classList.add('active');
-                }
-            });
-        });
-
-        const customLogo = document.getElementById('custom-logo');
-        customLogo.onerror = () => {
-            customLogo.src = 'https://via.placeholder.com/150x60?text=KrewsUp';
-        };
-    </script>
+    const customLogo = document.getElementById('custom-logo');
+    customLogo.onerror = () => {
+        customLogo.src = 'https://via.placeholder.com/150x60?text=KrewsUp';
+    };
+</script>
 </body>
 </html>
